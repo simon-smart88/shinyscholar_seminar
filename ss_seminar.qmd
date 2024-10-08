@@ -1,0 +1,275 @@
+---
+title: "Shinyscholar"
+subtitle: "A template for creating reproducible Shiny applications"
+author: "Simon Smart"
+format: 
+  revealjs:
+    logo: images/uol_logo.png
+    chalkboard: true
+    code-line-numbers: false
+server: shiny
+date: "7 November 2024"
+preload-iframes: true
+---
+
+```{css}
+code.sourceCode {
+  font-size: 0.8em;
+}
+
+.largecode code.sourceCode {
+font-size: 1.5em;
+}
+
+.mediumcode code.sourceCode {
+font-size: 1.1em;
+}
+
+p.smalltext {
+font-size: 30px !important;
+}
+
+table {
+font-size: 30px;
+}
+
+/*logo*/
+.reveal .slide-logo {
+  height: 100px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+/*Shiny input and outputs*/
+.shiny-input-container, .shiny-bound-output, .shiny-input-text {
+box-sizing: border-box;
+color: rgb(51, 51, 51);
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 22px;
+line-height: 25px;
+margin-bottom: 15px;
+max-width: 100%;
+width: 400px
+}
+
+
+/*Datatable*/
+table.dataTable {
+font-size: 16px;
+}
+
+table.dataTable tbody td {
+padding: 2px 2px;
+}
+
+.dataTables_wrapper, .dataTables_info {
+font-size: 16px;
+}
+
+/* Shiny error message*/
+.shiny-output-error-validation {
+color: green;
+}
+
+/*mermaid-diagrams*/
+/*input, server, output*/
+.sin > rect {
+    fill: #b5e9ec !important;
+}
+.sser > rect {
+    fill: #b5ecb6 !important;
+}
+.sout > rect {
+    fill: #d6b5ec !important;
+}
+
+
+```
+
+```{r eval=TRUE, echo=FALSE}
+library(shiny)
+library(dplyr)
+library(leaflet)
+```
+
+## Overview
+
+-   What is Shiny?
+-   Use of Shiny in academia
+-   How Shinyscholar helps to avoid common problems
+-   Disagapp as an example application
+
+## What is Shiny?
+
+-   R package developed by Posit/Rstudio, first released in 2012
+-   Framework for developing interactive applications using R
+-   Can run locally or online
+
+## Structure of a Shiny app {.largecode}
+
+Shiny apps consist of a user interface object (UI) and a server object
+
+```{r eval = FALSE, echo = TRUE}
+ui <- fluidPage() 
+
+server <- function(input, output) {}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Structure of a Shiny app {.largecode}
+
+Shiny apps consist of a user interface object (UI) and a server object
+
+::: columns
+::: {.column width="80%"}
+```{r eval = FALSE, echo = TRUE}
+ui <- fluidPage() 
+
+server <- function(input, output) {}
+
+shinyApp(ui = ui, server = server)
+```
+:::
+
+::: {.column width="20%"}
+-   Seeing
+
+-   Doing
+:::
+:::
+
+## A simple example
+
+```{r eval = FALSE, echo = TRUE}
+ui <- fluidPage(numericInput("number", "Enter a number", value = 5),
+                textOutput("answer"))
+
+server <- function(input, output) {
+  output$answer <- renderText(input$number * 10)
+}
+
+shinyApp(ui, server)
+```
+
+```{r}
+br()
+numericInput("number", "Enter a number", value = 5)
+textOutput("answer")
+```
+
+```{r}
+#| context: server
+output$answer <- renderText(input$number * 10)
+```
+
+## Use in academia
+
+::: columns
+::: {.column width="50%"}
+-   The low barrier to entry makes Shiny popular
+-   Substantially increased apps as a method of dissemination
+-   "shiny app" or "shiny application" in Web of Science:
+:::
+
+::: {.column width="50%" }
+```{r echo = FALSE, fig.height=10}
+year <- c(2012, 2015:2023) 
+apps <- c(1, 4, 3, 12, 17, 39, 69, 75, 100, 134)
+mod <- lm(log(apps) ~ year)
+
+par(cex = 1.5)
+plot(year, apps, pch = 16, xlab = '', ylab = 'Number of publications')
+lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0.1)))), col = 'blue')
+
+```
+:::
+:::
+
+## Use in academia
+
+-   Simple apps can be created in an afternoon
+-   Academics rarely have training in software development
+-   What started simple can quickly snowball to become very complex
+
+## Disagapp as a more complex example
+
+
+
+## What characteristics should academic apps have?
+
+-   Open
+-   Attributable
+-   Instructive
+-   Reproducible
+-   Reliable
+-   Maintainable
+
+## Modules
+
+-  Modules enable apps to be broken down into self-contained chunks
+-  Simplifies naming of objects 
+-  Easier to navigate and maintain
+
+## Functions
+
+- 
+
+## Packages
+
+-  R packages parcel up code for distribution to others
+-  Many tools and processes rely on packaging
+-  Enables installation in a single line
+
+## Survey of published apps
+
+-   50 apps published in 2023
+-   Papers, apps and source code examined
+-   Papers:
+    -   Do they cite packages?
+-   Apps:
+    -   Are they usable?
+    -   Provide instructions and explanation
+    -   Do they cite packages?
+    -   Are they reproducible?
+    -   Can errors be returned to the user?
+-   Source code:
+    -   Is it a package?
+    -   Are there functions?
+    -   Are there tests?
+
+## Few existing apps have these characteristics
+
+![](images/app features.png)
+
+-   Caveat - not all were analytical applications
+
+## Some codebases were unmaintainable
+
+![](images/code features.png) 
+
+
+## Wallace
+
+-   For modelling species distributions
+-   In development since 2015 with two major releases
+-   Feature-rich with many ideal characteristics
+
+## Shinyscholar enforces a strict structure
+
+-   Analyses are split into components and modules
+-   Each module calls a function
+-   Each module is reproduced by a markdown chunk
+
+## Boring, repetitive tasks are automated
+
+-   Code required for saving/loading and reproducibility is repetitive
+-   `save_and_load()` and `metadata()` automate these parts
+
+## Github
+
+-   simon-smart88
+-   shinyscholar
+-   disagapp
+-   These slides
+-   Introduction to shiny workshop
