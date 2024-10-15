@@ -99,15 +99,13 @@ library(leaflet)
 -   How Shinyscholar helps to avoid common problems
 -   Disagapp as an example application
 
-## What is Shiny?
+## Shiny enables the creation of applications in R 
 
 -   R package developed by Posit/Rstudio, first released in 2012
 -   Framework for developing interactive applications using R
 -   Can run locally or online
 
-## Structure of a Shiny app {.largecode}
-
-Shiny apps consist of a user interface object (UI) and a server object
+## Shiny apps consist of a user interface object (UI) and a server object {.largecode}
 
 ```{r eval = FALSE, echo = TRUE}
 ui <- fluidPage() 
@@ -121,7 +119,7 @@ shinyApp(ui = ui, server = server)
 
 Shiny apps consist of a user interface object (UI) and a server object
 
-::: columns
+::::: columns
 ::: {.column width="80%"}
 ```{r eval = FALSE, echo = TRUE}
 ui <- fluidPage() 
@@ -137,7 +135,7 @@ shinyApp(ui = ui, server = server)
 
 -   Doing
 :::
-:::
+:::::
 
 ## A simple example
 
@@ -165,14 +163,14 @@ output$answer <- renderText(input$number * 10)
 
 ## Use in academia
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   The low barrier to entry makes Shiny popular
 -   Substantially increased apps as a method of dissemination
 -   "shiny app" or "shiny application" in Web of Science:
 :::
 
-::: {.column width="50%" }
+::: {.column width="50%"}
 ```{r echo = FALSE, fig.height=10}
 year <- c(2012, 2015:2023) 
 apps <- c(1, 4, 3, 12, 17, 39, 69, 75, 100, 134)
@@ -184,7 +182,7 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ```
 :::
-:::
+:::::
 
 ## Use in academia
 
@@ -194,6 +192,8 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ## Disagapp as a more complex example
 
+
+## Make a figure showing all the modules
 
 
 ## What characteristics should academic apps have?
@@ -207,19 +207,26 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ## Modules
 
--  Modules enable apps to be broken down into self-contained chunks
--  Simplifies naming of objects 
--  Easier to navigate and maintain
+-   Modules enable apps to be broken down into self-contained chunks
+-   Simplifies naming of objects
+-   Easier to navigate and maintain
 
 ## Functions
 
-- 
+-   Separate normal R code from application logic
+-   Enable testing of the core functionality
 
 ## Packages
 
--  R packages parcel up code for distribution to others
--  Many tools and processes rely on packaging
--  Enables installation in a single line
+-   R packages parcel up code for distribution to others
+-   Many tools and processes rely on packaging
+-   Enables installation in a single line
+
+## Testing
+
+-   Unit tests test functions
+-   End-to-end test that the app works
+-   Enable continuous integration - we know when we break something
 
 ## Survey of published apps
 
@@ -233,6 +240,7 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
     -   Do they cite packages?
     -   Are they reproducible?
     -   Can errors be returned to the user?
+    -   Can you save / load?
 -   Source code:
     -   Is it a package?
     -   Are there functions?
@@ -240,20 +248,22 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ## Few existing apps have these characteristics
 
-![](images/app features.png)
+![](images/app%20features.png)
 
 -   Caveat - not all were analytical applications
 
 ## Some codebases were unmaintainable
 
-![](images/code features.png) 
-
+![](images/code%20features.png)
 
 ## Wallace
 
 -   For modelling species distributions
 -   In development since 2015 with two major releases
 -   Feature-rich with many ideal characteristics
+
+## Some info on changes from Wallace > SS
+
 
 ## Shinyscholar enforces a strict structure
 
@@ -265,6 +275,38 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 -   Code required for saving/loading and reproducibility is repetitive
 -   `save_and_load()` and `metadata()` automate these parts
+
+## Slow operations can be run asynchronously
+
+-  R runs on a single thread
+-  Slow steps (fitting a model) can block others from using the app
+-  
+
+## Forces a design phase upon developers
+
+
+## Demo app make with SS
+
+```{r eval = FALSE, echo = TRUE}
+modules <- data.frame(
+"component" = c("load", "load", "plot", "plot"),
+"long_component" = c("Load data", "Load data", "Plot data", "Plot data"),
+"module" = c("user", "database", "histogram", "scatter"),
+"long_module" = c("Upload your own data", "Query a database to obtain data", 
+                  "Plot the data as a histogram", "Plot the data as a scatterplot"),
+"map" = c(TRUE, TRUE, FALSE, FALSE),
+"result" = c(FALSE, FALSE, TRUE, TRUE),
+"rmd" = c(TRUE, TRUE, TRUE, TRUE),
+"save" = c(TRUE, TRUE, TRUE, TRUE))
+
+common_objects = c("raster", "histogram", "scatter")
+
+shinyscholar::create_template(
+  path = file.path("~", "Documents"), name = "demo", author = "Simon E. H. Smart",
+  include_map = TRUE, include_table = TRUE, include_code = TRUE, 
+  common_objects = common_objects, modules = modules, install = TRUE)
+```
+
 
 ## Github
 
