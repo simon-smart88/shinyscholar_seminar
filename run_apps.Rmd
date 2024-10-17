@@ -1,0 +1,7 @@
+
+```{r}
+library(shinyscholar)
+runApp("~/Documents/shinyscholar/inst/shiny" , launch.browser = FALSE, port= 5000)
+
+```
+

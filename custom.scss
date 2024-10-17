@@ -1,0 +1,40 @@
+/*-- scss:defaults --*/
+
+$body-bg: #e4fbf8;
+$body-color: #138541;
+$code-color: #264688;
+
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}
+
+.icons ul {
+   list-style: none;
+   margin-left: 0;
+   padding-left: 1em;
+   text-indent: -0.6em;
+}
+  
+  
+h2 {
+  color: #264688 !important;
+}
+
+.module_choice {
+  color:#648FFF;
+}
+
+.module_optional {
+  color:#DC267F;
+}
+
+.module_mandatory {
+  color:#FE6100;
+}
+
+.smalltext li{
+font-size: 35px !important;
+}
