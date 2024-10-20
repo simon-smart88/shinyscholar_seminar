@@ -416,6 +416,10 @@ Simon Smart
   background-color: #F0F0F0;
 }
 
+.reveal h2 {
+  font-size: 2em;
+}
+
 code.sourceCode {
   font-size: 0.8em;
 }
@@ -441,7 +445,7 @@ font-size: 30px;
   position: absolute;
   bottom: 100;
   width: 100%;
-  margin-left: 100px;
+  margin-left: 200px;
   text-align: center;
   font-size: 1.1em;
   color: #264688;
@@ -576,10 +580,10 @@ color: green;
 <p>https://www.soilbenchmark.com/</p>
 </div>
 </section>
-<section id="keras-cloud" class="slide level2">
-<h2>Keras Cloud</h2>
+<section id="kerus-cloud" class="slide level2">
+<h2>Kerus Cloud</h2>
 
-<img data-src="images/keras_cloud.png" class="r-stretch"><div class="footer">
+<img data-src="images/kerus_cloud.png" class="r-stretch"><div class="footer">
 <p>https://exploristics.com/keruscloud-platform-overview/</p>
 </div>
 </section>
@@ -818,6 +822,9 @@ color: green;
 <p><em>(a)</em> Total lines, <em>(b)</em> Lines in <code>app.R</code> or <code>server.R</code>, <em>(c)</em> Mean lines per <code>.R</code> file, <em>(d)</em> %age in <code>app.R</code> or <code>server.R</code></p>
 
 <img data-src="images/code_features.svg" class="r-stretch"></section>
+<section id="screenshots" class="slide level2">
+<h2>Screenshots?</h2>
+</section>
 <section id="wallace-is-an-app-for-modelling-species-distributions" class="slide level2">
 <h2>Wallace is an app for modelling species distributions</h2>
 <ul>
@@ -842,12 +849,13 @@ color: green;
 <section id="wallace-provided-the-basis-to-create-a-template" class="slide level2">
 <h2>Wallace provided the basis to create a template</h2>
 <ul>
-<li>Removed all the</li>
+<li>Removed all the modules</li>
 </ul>
 </section>
 <section id="there-were-still-areas-to-improve-wallace" class="slide level2">
 <h2>There were still areas to improve Wallace</h2>
 <ul>
+<li>Complex interface may be difficult to navigate</li>
 <li>Server function was still 1500 lines long</li>
 <li>Only unit tests, no end-to-end tests</li>
 <li>Potential issues with long-term reproducibility</li>
@@ -857,6 +865,7 @@ color: green;
 <section id="c" class="slide level2">
 <h2>C</h2>
 <ul>
+<li><p>Added a guided tour using <code>{rintrojs}</code></p></li>
 <li><p>Moved code for mapping, saving and loading to modules</p></li>
 <li><p>Added end-to-end tests</p></li>
 <li><p>Use <code>{renv}</code> to capture the precise environment</p></li>

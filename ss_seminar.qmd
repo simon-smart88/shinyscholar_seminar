@@ -10,6 +10,7 @@ format:
     chalkboard: true
     width: 1600  # Set your desired width in pixels
     height: 900
+    scale: true
 server: shiny
 date: "7 November 2024"
 preload-iframes: true
@@ -21,16 +22,20 @@ preload-iframes: true
   background-color: #F0F0F0;
 }
 
+.reveal h2 {
+  font-size: 2em;
+}
+
 code.sourceCode {
   font-size: 0.8em;
 }
 
 .largecode code.sourceCode {
-font-size: 1.5em;
+font-size: 2em;
 }
 
 .mediumcode code.sourceCode {
-font-size: 1.1em;
+font-size: 1.6em;
 }
 
 p.smalltext {
@@ -46,9 +51,9 @@ font-size: 30px;
   position: absolute;
   bottom: 100;
   width: 100%;
-  margin-left: 100px;
+  margin-left: 200px;
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.3em;
   color: #264688;
   z-index: 2;
   margin-right: 250px;
@@ -175,15 +180,16 @@ output$answer <- renderText(input$number * 10)
 ![](images/soil_benchmark.png)
 
 ::: footer
-https://www.soilbenchmark.com/
+<a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
 :::
 
-## Keras Cloud
+## Kerus Cloud
 
-![](images/keras_cloud.png)
+![](images/kerus_cloud.png)
 
 ::: footer
-https://exploristics.com/keruscloud-platform-overview/
+<a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
+
 :::
 
 ## Shiny apps are becoming increasingly popular in academia
@@ -384,11 +390,11 @@ testthat::expect_equal(output$answer, 100)
 
 ## Where available, source code was examined to determine:
 
+-   How many lines of code?
 -   Is it a package?
 -   Are there functions?
 -   Are there modules?
 -   Are there tests?
--   How many lines of code?
 
 ## Few existing apps have these characteristics
 
@@ -417,7 +423,7 @@ testthat::expect_equal(output$answer, 100)
 
 ::: footer
 -   Kass *et al.* (2018) <a href="https://doi.org/10.1111/2041-210X.12945" target="_blank">DOI: 10.1111/2041-210X.12945</a>
--   Kass *et al.* (2022) <a href="https://doi.org/10.1111/ecog.06547" target="_blank">DOI: 10.1111/ecog.06547</a>.\
+-   Kass *et al.* (2022) <a href="https://doi.org/10.1111/ecog.06547" target="_blank">DOI: 10.1111/ecog.06547</a>
 :::
 
 ## Wallace provided the basis to create a template
@@ -443,7 +449,6 @@ testthat::expect_equal(output$answer, 100)
 
 
 -   Code for each module can be viewed in the app
--   Added introduction
 
 ## Shinyscholar enforces a strict structure
 
@@ -454,9 +459,7 @@ testthat::expect_equal(output$answer, 100)
 
 ## {data-menu-title="Shinyscholar demo"}
 
-<iframe width="100%" height="100%" src="http://127.0.0.1:5000">
-
-</iframe>
+<iframe width="100%" height="100%" src="http://127.0.0.1:5000"></iframe>
 
 ## Markdown files can be merged to replicate the analysis
 
@@ -495,11 +498,11 @@ shinyscholar::create_template(
 ```{r echo = TRUE, eval = FALSE}
 numericInput("number", "Enter a number", value = 5)
 
-list(number = input$number)
-updateNumericInput(session, "number", state$number)
-common$meta$comp_mod$number <- input$number
-comp_mod_number <- common$meta$comp_mod$number
-{{comp_mod_number}}
+list(number = input$number) # save
+updateNumericInput(session, "number", state$number) # load
+common$meta$comp_mod$number <- input$number # store
+comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
+{{comp_mod_number}} # use in Rmd
 
 ```
 
@@ -521,7 +524,7 @@ comp_mod_number <- common$meta$comp_mod$number
 
 ## Github
 
--   simon-smart88
+-  <a href="https://github.com/simon-smart88 " target="_blank">https://github.com/simon-smart88 </a>
 -   shinyscholar
 -   disagapp
 -   These slides
