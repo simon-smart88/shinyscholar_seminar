@@ -11,6 +11,7 @@ format:
     width: 1600  # Set your desired width in pixels
     height: 900
     scale: true
+    slide-number: true
 server: shiny
 date: "7 November 2024"
 preload-iframes: true
@@ -23,7 +24,16 @@ preload-iframes: true
 }
 
 .reveal h2 {
-  font-size: 2em;
+  font-size: 2.2em;
+}
+
+ul {
+  font-size:1.6em;
+}
+
+/* Stops nested increase in font size */
+ul ul {
+  font-size: 1em;
 }
 
 code.sourceCode {
@@ -31,7 +41,7 @@ code.sourceCode {
 }
 
 .largecode code.sourceCode {
-font-size: 2em;
+font-size: 2.2em;
 }
 
 .mediumcode code.sourceCode {
@@ -46,14 +56,27 @@ table {
 font-size: 30px;
 }
 
-.reveal .footer {
+.footer {
   display: flex;
   position: absolute;
   bottom: 100;
   width: 100%;
   margin-left: 200px;
   text-align: center;
-  font-size: 1.3em;
+  font-size: 1em;
+  color: #264688;
+  z-index: 2;
+  margin-right: 250px;
+}
+
+li.footer {
+  display: flex;
+  position: absolute;
+  bottom: 100;
+  width: 100%;
+  margin-left: 200px;
+  text-align: center;
+  font-size: 1em;
   color: #264688;
   z-index: 2;
   margin-right: 250px;
@@ -61,52 +84,27 @@ font-size: 30px;
 
 /*logo*/
 .reveal .slide-logo {
-  height: 100px !important;
+  height: 8% !important;
   max-width: unset !important;
   max-height: unset !important;
 }
 
 /*Shiny input and outputs*/
-.shiny-input-container, .shiny-bound-output, .shiny-input-text {
+.shiny-input-container, .shiny-bound-output {
 box-sizing: border-box;
 color: rgb(51, 51, 51);
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 22px;
-line-height: 25px;
-margin-bottom: 15px;
+font-size: 1.4em;
+line-height: 50px;
+margin-bottom: 30px;
 max-width: 100%;
-width: 400px
+width: 50% !important;
 }
 
-
-/*Datatable*/
-table.dataTable {
-font-size: 16px;
-}
-
-table.dataTable tbody td {
-padding: 2px 2px;
-}
-
-.dataTables_wrapper, .dataTables_info {
-font-size: 16px;
-}
-
-/* Shiny error message*/
-.shiny-output-error-validation {
-color: green;
-}
-
-/*mermaid-diagrams*/
-/*input, server, output*/
-.sin > rect {
-    fill: #b5e9ec !important;
-}
-.sser > rect {
-    fill: #b5ecb6 !important;
-}
-.sout > rect {
-    fill: #d6b5ec !important;
+.shiny-input-number .form-control .shiny-bound-input {
+font-size: 1.2em;
+width: 50% !important;
+margin-bottom: 30px;
 }
 
 
@@ -115,7 +113,6 @@ color: green;
 ```{r eval=TRUE, echo=FALSE}
 library(shiny)
 library(dplyr)
-library(leaflet)
 ```
 
 ## Overview
@@ -138,6 +135,87 @@ library(leaflet)
 -   Can run locally or online
 -   Make it much easier to share code with non R-users
 
+::: {.notes}
+- Anything in R can be made GUI with Shiny
+- Large ecosystem of packages create since
+- Especially easy to make available online through Rstudio
+:::
+
+## Data pipelines
+
+-   Analytical apps have a flow of data through them
+-   Similar to an analysis, but we are providing options for the user to take their own particular path
+
+![](images/data_pipeline.svg)
+
+::: {.notes}
+-   Distinguish between datavis apps and analysis apps
+:::
+
+## Shiny apps are becoming increasingly popular in academia
+
+::: columns
+::: {.column width="50%"}
+-   The low barrier to entry makes Shiny popular
+-   Substantially increased apps as a method of dissemination
+-   "shiny app" or "shiny application" in Web of Science:
+:::
+
+::: {.column width="50%"}
+```{r echo = FALSE, fig.height=10}
+year <- c(2012, 2015:2023) 
+apps <- c(1, 4, 3, 12, 17, 39, 69, 75, 100, 134)
+mod <- lm(log(apps) ~ year)
+
+par(cex = 1.5, bg = '#e4fbf8')
+plot(year, apps, pch = 16, xlab = '', ylab = 'Number of publications')
+lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0.1)))), col = 'blue')
+
+```
+:::
+:::
+
+## Creating analytical apps lowers the barrier of entry
+
+- Enable users without coding skills to access cutting-edge analyses
+- Link to data pipeline - provide handrails for the user 
+- Enable access for restricted users e.g. in NHS
+
+## Shinyscholar helps create high quality analytical applications
+
+::: columns
+::: {.column width="70%"}
+-   Creates an empty application with a regular structure
+-   Make it easier to follow software development best practices
+-   Developers can concentrate on creating functionality 
+:::
+::: {.column width="30%"}
+<img src="images/ss_logo.png" width="auto" height="auto" align="right" >
+:::
+:::
+
+## CRSU app
+
+
+## Soil Benchmark
+
+![](images/soil_benchmark.png)
+
+::: footer
+<a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
+:::
+
+
+## Kerus Cloud
+
+![](images/kerus_cloud.png)
+
+::: footer
+<a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
+
+:::
+
+
 ## Shiny apps consist of a user interface object (UI) and a server object {.largecode}
 
 ```{r eval = FALSE, echo = TRUE}
@@ -147,6 +225,12 @@ server <- function(input, output) {}
 
 shinyApp(ui = ui, server = server)
 ```
+
+::: {.notes}
+- However complex, all apps have this structure
+- UI creates a webpage and is displayed in the browser
+- Server code is run on a server but unlike normal R code, it can be run multiple times
+:::
 
 ## Data is transferred between the UI and server through the input and output {.mediumcode}
 
@@ -175,44 +259,10 @@ textOutput("answer")
 output$answer <- renderText(input$number * 10)
 ```
 
-## Soil Benchmark
-
-![](images/soil_benchmark.png)
-
-::: footer
-<a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
-:::
-
-## Kerus Cloud
-
-![](images/kerus_cloud.png)
-
-::: footer
-<a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
-
-:::
-
-## Shiny apps are becoming increasingly popular in academia
-
-::: columns
-::: {.column width="50%"}
--   The low barrier to entry makes Shiny popular
--   Substantially increased apps as a method of dissemination
--   "shiny app" or "shiny application" in Web of Science:
-:::
-
-::: {.column width="50%"}
-```{r echo = FALSE, fig.height=10}
-year <- c(2012, 2015:2023) 
-apps <- c(1, 4, 3, 12, 17, 39, 69, 75, 100, 134)
-mod <- lm(log(apps) ~ year)
-
-par(cex = 1.5, bg = '#e4fbf8')
-plot(year, apps, pch = 16, xlab = '', ylab = 'Number of publications')
-lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0.1)))), col = 'blue')
-
-```
-:::
+::: {.notes}
+- Note number and input$number, output$answer, answer
+- Whenever input values change, the code that uses them is rerun
+- The beauty of shiny is that we don't have to manage the (complicated) communication process between the web page and the server
 :::
 
 ## The ease of development provides advantages and disadvantages
@@ -221,89 +271,100 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 -   Academics rarely have training in software development
 -   What started simple can quickly snowball to become very complex
 
-## Data pipelines
+## App design
 
--   Nearly all apps have a flow of data through them
--   Similar to an analysis, but we are providing options for the user to take their own particular path
-
-![](images/data_pipeline.svg)
-
-## Complex apps contain thousands of lines of code
-
-![](images/disagapp.png)
-
-## sad
-
-```{r, embed="~/Documents/shinyscholar/inst/shiny/server.R", include= TRUE}
-```
+-  What features do we need?
+    - Generic
+    - Specific
+-  How should the code be structured?
+-  How do we make sure that it works?
 
 ## What characteristics should academic apps have?
 
+::: columns
+::: {.column width="50%"}
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   Open
 :::
-:::
-
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   Attributable
 :::
-:::
-
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   Instructive
 :::
 :::
 
+::: {.column width="50%"}
+
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   Reproducible
 :::
-:::
-
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   Reliable
 :::
-:::
-
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   Maintainable
 :::
+:::
+:::
+
+::: {.notes}
+- We are all familiar with the format and conventions of papers, but they weren't always like that. Should we aim to develop similar conventions for apps?
+
+- Open enables reuse and collaboration
+- Important to recognise developers of the software like authors of a paper
+- Users should be guided through inside of the application, not through watching videos or reading a guide 
+- Analyses performed in the app should be reproducible outside of it
+- We should be confident that it functions as intended through the use of automated testing
+- Contracts are short, so it is important people unfamiliar with the code can understand what is happening.
+
 :::
 
 ## Why reproducible?
 
 -   Avoid the app being a black box
+-   As a tool for learning
 -   Allow users to edit and refine the analysis
 -   Increasingly required when findings are published
 -   If the app goes offline, the user can still get the same results
 
-## How should apps be structured?
+## How should app code be structured?
 
 ::: columns
-::: {.column width="25%"}
+::: {.column width="20%"}
+:::
+::: {.column width="15%"}
 ::: fragment
 ![](images/app_arch_1.svg)
 :::
 :::
+:::
 
-::: {.column width="25%"}
+## How should app code be structured?
+![](images/ROGUE_input.png)
+![](images/ROGUE_output.png)
+
+## How should app code be structured?
+::: columns
+::: {.column width="20%"}
+:::
+::: {.column width="15%"}
+![](images/app_arch_1.svg)
+:::
+
+::: {.column width="15%"}
 ::: fragment
 ![](images/app_arch_2.svg)
 :::
 :::
 
-::: {.column width="25%"}
+::: {.column width="15%"}
 ::: fragment
 ![](images/app_arch_3.svg)
 :::
 :::
 
-::: {.column width="25%"}
+::: {.column width="15%"}
 ::: fragment
 ![](images/app_arch_4.svg)
 :::
@@ -319,7 +380,7 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ```{r eval = FALSE, echo = TRUE}
 multiply_by_ten <- function(x){
-  return(x * 10)
+  x * 10
 }
 ```
 
@@ -327,13 +388,20 @@ multiply_by_ten <- function(x){
 
 -   Inputs and outputs for different parts are separated
 -   Simplifies naming of objects
--   Easier to navigate and maintain
+-   Easier to navigate files and maintain code
 
 ::: {.fragment .fade-in}
 -   But they need to be able to communicate...
 :::
 
-## Testing ensures code works as intended across platforms
+::: .{notes}
+- Similar to chunks in Rmd / scripts in a large analysis
+:::
+
+
+## Add diagram of shinyscholar modules? 
+
+## Testing ensures code works as intended across platforms {.mediumcode}
 
 ::: {.fragment .fade-in}
 ::: {.fragment .semi-fade-out}
@@ -368,7 +436,7 @@ testthat::expect_equal(output$answer, 100)
 ## Packages ease development and distribution of code
 
 -   R packages parcel up code for distribution to others
--   Many tools and processes rely on packaging
+-   Many tools and processes rely on code being a package
 -   Enables installation in a single line
 
 ## 50 apps published in 2023 were surveyed to determine current practices
@@ -405,11 +473,13 @@ testthat::expect_equal(output$answer, 100)
 ## The size and structure of codebases varied substantially
 
 *(a)* Total lines, *(b)* Lines in `app.R` or `server.R`, *(c)* Mean lines per `.R` file, *(d)* %age in `app.R` or `server.R`
+Move titles to graph
 
 ![](images/code_features.svg)
 
-## Screenshots?
+## Wallace is an app for modelling species distributions
 
+![](images/wallace.png)
 
 ## Wallace is an app for modelling species distributions
 
@@ -422,15 +492,18 @@ testthat::expect_equal(output$answer, 100)
     -   Cites packages used
 
 ::: footer
--   Kass *et al.* (2018) <a href="https://doi.org/10.1111/2041-210X.12945" target="_blank">DOI: 10.1111/2041-210X.12945</a>
--   Kass *et al.* (2022) <a href="https://doi.org/10.1111/ecog.06547" target="_blank">DOI: 10.1111/ecog.06547</a>
+- Kass *et al.* (2018) <a href="https://doi.org/10.1111/2041-210X.12945" target="_blank">DOI: 10.1111/2041-210X.12945</a>
+- Kass *et al.* (2022) <a href="https://doi.org/10.1111/ecog.06547" target="_blank">DOI: 10.1111/ecog.06547</a>
 :::
+
 
 ## Wallace provided the basis to create a template
 
+-  Lots of useful features that are difficult to implement
+
 -  Removed all the modules 
 
-## There were still areas to improve Wallace
+## There were still areas where Wallace could be improved upon
 
 -   Complex interface may be difficult to navigate
 -   Server function was still 1500 lines long
@@ -438,16 +511,13 @@ testthat::expect_equal(output$answer, 100)
 -   Potential issues with long-term reproducibility
 -   Not deployed online
 
-
-## C
+## Changes 
 
 -   Added a guided tour using `{rintrojs}`
 -   Moved code for mapping, saving and loading to modules
 -   Added end-to-end tests
 -   Use `{renv}` to capture the precise environment
 -   Added a Dockerfile to enable easier cloud deployment
-
-
 -   Code for each module can be viewed in the app
 
 ## Shinyscholar enforces a strict structure
@@ -455,7 +525,11 @@ testthat::expect_equal(output$answer, 100)
 -   Analyses are split into components and modules
 -   Each module calls a function
 -   Each module is reproduced by a markdown chunk
--   Files have the format of `<component>_<module>_f.R`, `<component>_<module>.R`, `<component>_<module>.Rmd`
+-   Data is passed between modules through `common`
+-   Files have the format of:
+    - function: `<component>_<module>_f.R`
+    - module: `<component>_<module>.R`
+    - markdown: `<component>_<module>.Rmd`
 
 ## {data-menu-title="Shinyscholar demo"}
 
@@ -463,12 +537,55 @@ testthat::expect_equal(output$answer, 100)
 
 ## Markdown files can be merged to replicate the analysis
 
--   When a module is used some object comes into existence
+-   When a module is used an object becomes `TRUE`
 -   Input values are stored and *knitted* into the markdown
 -   Each chunk of the markdown calls the same function as the module in the app
 -   The chunks for used modules are combined into one `.Rmd` file
 
-## Demo app make with SS
+## Example chunk
+```{r eval = FALSE, echo = TRUE}
+#```{r, echo = {{select_query_knit}}, include = {{select_query_knit}}}
+poly <- matrix({{select_poly}}, ncol = 2, byrow = FALSE)
+token <- {{select_token}}
+ras <- select_query(poly, {{select_date}}, token)
+raster_name <- {{select_name}}
+
+raster_extent <- as.vector(terra::ext(ras))
+map_pal <- colorBin("Greens", domain = values(ras), bins = 9, na.color = "#00000000")
+
+leaflet() %>%
+  addProviderTiles("Esri.WorldTopoMap") %>%
+  addRasterImage(ras, colors = map_pal) %>%
+  addTiles(urlTemplate = "", attribution = "MODIS data via LAADS DAAC") %>%
+  fitBounds(lng1 = raster_extent[[1]], lng2 = raster_extent[[2]], lat1 = raster_extent[[3]], lat2 = raster_extent[[4]]) %>%
+  addLegend(position = "bottomright", pal = map_pal, values = values(ras),
+            title = raster_name) 
+#```
+```
+
+## Example Rmd
+
+```{r eval = FALSE, echo = TRUE}
+#```{r}
+poly <- matrix(c(-1.54202000000001, -1.54202000000001, -0.718278999999995, -0.718278999999995, -1.54202000000001, 52.509368, 52.789309, 52.789309, 52.509368, 52.509368), ncol = 2, byrow = FALSE)
+token <- NULL
+ras <- select_async(poly, "2024-10-09", token)$raster
+raster_name <- "FAPAR"
+
+raster_extent <- as.vector(terra::ext(ras))
+map_pal <- colorBin("Greens", domain = terra::values(ras), bins = 9, na.color = "#00000000")
+
+leaflet() %>%
+  addProviderTiles("Esri.WorldTopoMap") %>%
+  addRasterImage(ras, colors = map_pal) %>%
+  addTiles(urlTemplate = "", attribution = "MODIS data via LAADS DAAC") %>%
+  fitBounds(lng1 = raster_extent[[1]], lng2 = raster_extent[[2]], lat1 = raster_extent[[3]], lat2 = raster_extent[[4]]) %>%
+  addLegend(position = "bottomright", pal = map_pal, values = terra::values(ras),
+            title = raster_name) 
+#```
+```
+
+## `create_template()` creates an empty app
 
 ```{r eval = FALSE, echo = TRUE}
 modules <- data.frame(
@@ -490,7 +607,7 @@ shinyscholar::create_template(
   common_objects = common_objects, modules = modules, install = TRUE)
 ```
 
-## Boring, repetitive tasks are automated
+## Boring, repetitive coding tasks are automated 
 
 -   Code required for saving/loading and reproducibility is repetitive
 -   `save_and_load()` and `metadata()` automate these parts
@@ -514,13 +631,19 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 
 ## Forces a design phase upon developers
 
-## Make a figure showing all the modules
+## Disaggregation regression enables high resolution
+
+## There are several types of data to process
+
+![](images/disag_data_types_path.svg)
+
+## Components and module in disagapp
 
 ![](images/disagg_modules_path.svg)
 
-## Disagapp
+## Load an analysis from file
 
-![](images/disag_data_types_path.svg)
+<iframe width="100%" height="100%" src="http://127.0.0.1:5000"></iframe>
 
 ## Github
 
@@ -541,6 +664,7 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 :::
 
 ::: {.column width="50%"}
-![](images/wellcome_logo.png) ![](images/wallace_logo.png)
+<img src="images/wellcome_logo.png" width="300">
+<img src="images/wallace_logo.png" width="400">
 :::
 :::
