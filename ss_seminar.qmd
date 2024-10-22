@@ -8,7 +8,7 @@ format:
     code-line-numbers: false
     theme: [default, custom.scss]
     chalkboard: true
-    width: 1600  # Set your desired width in pixels
+    width: 1600  
     height: 900
     scale: true
     slide-number: true
@@ -56,20 +56,13 @@ table {
 font-size: 30px;
 }
 
-.footer {
-  display: flex;
-  position: absolute;
-  bottom: 100;
-  width: 100%;
-  margin-left: 200px;
-  text-align: center;
-  font-size: 1em;
-  color: #264688;
-  z-index: 2;
-  margin-right: 250px;
+.centre_image {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-li.footer {
+.reveal .footer {
   display: flex;
   position: absolute;
   bottom: 100;
@@ -141,13 +134,17 @@ library(dplyr)
 - Especially easy to make available online through Rstudio
 :::
 
-## Data pipelines
+## Data flows through an analysis in discrete steps 
 
 -   Analytical apps have a flow of data through them
 -   Similar to an analysis, but we are providing options for the user to take their own particular path
 
-![](images/data_pipeline.svg)
-
+<img src="images/data_pipeline.svg" class="centre_image" >
+ 
+::: footer
+- Adapted from <a href="https://r4ds.hadley.nz/intro" target="_blank">Wickham (2022)</a>
+:::
+ 
 ::: {.notes}
 -   Distinguish between datavis apps and analysis apps
 :::
@@ -155,13 +152,13 @@ library(dplyr)
 ## Shiny apps are becoming increasingly popular in academia
 
 ::: columns
-::: {.column width="50%"}
+::: {.column width="55%"}
 -   The low barrier to entry makes Shiny popular
 -   Substantially increased apps as a method of dissemination
 -   "shiny app" or "shiny application" in Web of Science:
 :::
 
-::: {.column width="50%"}
+::: {.column width="45%"}
 ```{r echo = FALSE, fig.height=10}
 year <- c(2012, 2015:2023) 
 apps <- c(1, 4, 3, 12, 17, 39, 69, 75, 100, 134)
@@ -202,7 +199,7 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 ![](images/soil_benchmark.png)
 
 ::: footer
-<a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
+- <a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
 :::
 
 
@@ -211,7 +208,7 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 ![](images/kerus_cloud.png)
 
 ::: footer
-<a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
+- <a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
 
 :::
 
@@ -320,7 +317,7 @@ output$answer <- renderText(input$number * 10)
 
 :::
 
-## Why reproducible?
+## Reproducility futureproofs analyses made in an app
 
 -   Avoid the app being a black box
 -   As a tool for learning
@@ -394,7 +391,9 @@ multiply_by_ten <- function(x){
 -   But they need to be able to communicate...
 :::
 
-::: .{notes}
+::: {.notes}
+- Mini apps within an app
+- Allows multiple objects with the same name in different modules
 - Similar to chunks in Rmd / scripts in a large analysis
 :::
 
@@ -404,7 +403,6 @@ multiply_by_ten <- function(x){
 ## Testing ensures code works as intended across platforms {.mediumcode}
 
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   *Unit tests* check functions
 
 ```{r eval = FALSE, echo = TRUE}
@@ -412,10 +410,7 @@ testthat::expect_equal(multiply_by_ten(5), 50)
 testthat::expect_is(multiply_by_ten(5), "numeric")
 ```
 :::
-:::
-
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
 -   *End-to-end tests* check the app works
 
 ```{r eval = FALSE, echo = TRUE}
@@ -425,12 +420,8 @@ output <- app$get_values()$output
 testthat::expect_equal(output$answer, 100)
 ```
 :::
-:::
-
 ::: {.fragment .fade-in}
-::: {.fragment .semi-fade-out}
--   Enable *continuous integration* - we know when we break something
-:::
+-   Enable *continuous integration* 
 :::
 
 ## Packages ease development and distribution of code
@@ -466,42 +457,45 @@ testthat::expect_equal(output$answer, 100)
 
 ## Few existing apps have these characteristics
 
--   Caveat: not all were analytical applications
+<img src="images/app_features.svg" class="centre_image" >
 
-![](images/app_features.svg)
+::: {.notes}
+- Caveat: not all were analytical applications
+:::
 
 ## The size and structure of codebases varied substantially
-
-*(a)* Total lines, *(b)* Lines in `app.R` or `server.R`, *(c)* Mean lines per `.R` file, *(d)* %age in `app.R` or `server.R`
-Move titles to graph
-
-![](images/code_features.svg)
+<img src="images/code_features.svg" class="centre_image" >
 
 ## Wallace is an app for modelling species distributions
-
-![](images/wallace.png)
+<img src="images/wallace.png" class="centre_image" >
 
 ## Wallace is an app for modelling species distributions
 
 -   In development since 2015 with two major releases
 -   Feature-rich with many ideal characteristics:
-    -   Error messages
-    -   Logging
-    -   Save and load
-    -   Reproducible
-    -   Cites packages used
+
+::: columns
+::: {.column width="50%"}
+-   Error messages
+-   Logging
+-   Save and load
+:::
+::: {.column width="50%"}
+-   Reproducible
+-   Cites packages used
+:::
+:::
 
 ::: footer
 - Kass *et al.* (2018) <a href="https://doi.org/10.1111/2041-210X.12945" target="_blank">DOI: 10.1111/2041-210X.12945</a>
 - Kass *et al.* (2022) <a href="https://doi.org/10.1111/ecog.06547" target="_blank">DOI: 10.1111/ecog.06547</a>
 :::
 
-
 ## Wallace provided the basis to create a template
 
 -  Lots of useful features that are difficult to implement
-
--  Removed all the modules 
+-  Removed all the modules
+-  Adapted files so they could be edited programmatically
 
 ## There were still areas where Wallace could be improved upon
 
@@ -511,7 +505,7 @@ Move titles to graph
 -   Potential issues with long-term reproducibility
 -   Not deployed online
 
-## Changes 
+## Several changes were made to address these issues
 
 -   Added a guided tour using `{rintrojs}`
 -   Moved code for mapping, saving and loading to modules
@@ -542,7 +536,7 @@ Move titles to graph
 -   Each chunk of the markdown calls the same function as the module in the app
 -   The chunks for used modules are combined into one `.Rmd` file
 
-## Example chunk
+## Input values are copied into the markdown
 ```{r eval = FALSE, echo = TRUE}
 #```{r, echo = {{select_query_knit}}, include = {{select_query_knit}}}
 poly <- matrix({{select_poly}}, ncol = 2, byrow = FALSE)
@@ -563,13 +557,13 @@ leaflet() %>%
 #```
 ```
 
-## Example Rmd
+## To create a reproducible chunk
 
 ```{r eval = FALSE, echo = TRUE}
 #```{r}
 poly <- matrix(c(-1.54202000000001, -1.54202000000001, -0.718278999999995, -0.718278999999995, -1.54202000000001, 52.509368, 52.789309, 52.789309, 52.509368, 52.509368), ncol = 2, byrow = FALSE)
 token <- NULL
-ras <- select_async(poly, "2024-10-09", token)$raster
+ras <- select_query(poly, "2024-10-09", token)
 raster_name <- "FAPAR"
 
 raster_extent <- as.vector(terra::ext(ras))
@@ -607,6 +601,11 @@ shinyscholar::create_template(
   common_objects = common_objects, modules = modules, install = TRUE)
 ```
 
+::: {.notes}
+ - Forces a design phase upon developers
+
+:::
+
 ## Boring, repetitive coding tasks are automated 
 
 -   Code required for saving/loading and reproducibility is repetitive
@@ -627,21 +626,25 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 
 -   R runs on a single thread
 -   Slow steps (fitting a model) can block others from using the app
--   
 
-## Forces a design phase upon developers
+## Disaggregation regression enables high resolution disease mapping
 
-## Disaggregation regression enables high resolution
+::: columns
+::: {.column width="50%"}
+<img src="images/mad_shape.png" class="centre_image">
+:::
+::: {.column width="50%"}
+<img src="images/mad_pred.png" class="centre_image">
+:::
+:::
 
 ## There are several types of data to process
+<img src="images/disag_data_types_path.svg" class="centre_image" >
 
-![](images/disag_data_types_path.svg)
+## Modules are classified depending on their necessity
+<img src="images/disagg_modules_path.svg" class="centre_image" >
 
-## Components and module in disagapp
-
-![](images/disagg_modules_path.svg)
-
-## Load an analysis from file
+## {data-menu-title="Disagapp demo"}
 
 <iframe width="100%" height="100%" src="http://127.0.0.1:5000"></iframe>
 
