@@ -396,12 +396,18 @@ multiply_by_ten <- function(x){
 
 ## Modules enable apps to be broken down into self-contained chunks
 
+::: columns
+::: {.column width="70%"}
 -   Inputs and outputs for different parts are separated
 -   Simplifies naming of objects
 -   Easier to navigate files and maintain code
-
 ::: {.fragment .fade-in}
 -   But they need to be able to communicate...
+:::
+:::
+::: {.column width="30%"}
+<img src="images/modules.svg" width="auto" height="auto" align="right" >
+:::
 :::
 
 ::: {.notes}
@@ -409,9 +415,6 @@ multiply_by_ten <- function(x){
 - Allows multiple objects with the same name in different modules
 - Similar to chunks in Rmd / scripts in a large analysis
 :::
-
-
-## Add diagram of shinyscholar modules? 
 
 ## Testing ensures code works as intended across platforms {.mediumcode}
 
@@ -543,15 +546,22 @@ testthat::expect_equal(output$answer, 100)
 -   Data is passed between modules through `common`
 
 ## Each module has several files associated with it
-- Function: `<component>_<module>_f.R`
-- Module: `<component>_<module>.R`
-- Markdown: `<component>_<module>.Rmd`
-- Guidance `<component>_<module>.md`
-- Configuration `<component>_<module>.yml`
+-   Function: `<component>_<module>_f.R`
+-   Module: `<component>_<module>.R`
+-   Markdown: `<component>_<module>.Rmd`
+-   Guidance: `<component>_<module>.md`
+-   Configuration: `<component>_<module>.yml`
+-   Tests: `test-<component>_<module>.R`
 
 ## {data-menu-title="Shinyscholar demo"}
 
 <iframe width="100%" height="100%" src="https://simonsmart.shinyapps.io/shinyscholar/"></iframe>
+
+::: {.notes}
+- Point out guidance and attribution
+- Code
+- That it is apparent from the UI where code is located
+:::
 
 ## Markdown files can be merged to replicate the analysis
 
@@ -570,11 +580,11 @@ raster_name <- {{select_query_name}}
 #```
 ```
 
-## To create a reproducible chunk
+## To create a reproducible chunk {.mediumcode}
 
 ```{r eval = FALSE, echo = TRUE}
 #```{r}
-poly <- matrix(c(-1.54202000000001, -1.54202000000001, -0.718278999999995, -0.718278999999995, -1.54202000000001, 52.509368, 52.789309, 52.789309, 52.509368, 52.509368), ncol = 2, byrow = FALSE)
+poly <- matrix(c(-1.54202, -1.54202, -0.718279, -0.718279, -1.54202, 52.509368, 52.789309, 52.789309, 52.509368, 52.509368), ncol = 2, byrow = FALSE)
 token <- NULL
 ras <- select_query(poly, "2024-10-09", token)
 raster_name <- "FAPAR"
@@ -631,6 +641,7 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 
 -   R runs on a single thread
 -   Slow steps (fitting a model) can block others from using the app
+-   If `async = TRUE` the modules are created so that functions run in the background
 
 ## Disaggregation regression enables high resolution disease mapping
 
@@ -650,12 +661,18 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 <img src="images/disagg_modules_path.svg" class="centre_image" >
 
 ## {data-menu-title="Disagapp demo"}
-
 <iframe width="100%" height="100%" src="http://127.0.0.1:5000"></iframe>
+
+## Summary
+
+-  Shiny apps are easy to create and help disseminate methods
+-  Current software development practices in academic apps could be improved
+-  Shinyscholar helps create apps that are:
+    - Open, attributable, instructive, reproducible reliable and maintainable
 
 ## Github
 
--  <a href="https://github.com/simon-smart88 " target="_blank">https://github.com/simon-smart88 </a>
+-  <a href="https://github.com/simon-smart88 " target="_blank">https://github.com/simon-smart88</a>
 -   shinyscholar
 -   disagapp
 -   These slides
@@ -672,7 +689,9 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 :::
 
 ::: {.column width="50%"}
-<img src="images/wellcome_logo.png" width="300">
-<img src="images/wallace_logo.png" width="400">
+<div> 
+<img src="images/wellcome_logo.png" width="300" style = "display: block;">
+<img src="images/wallace_logo.png" width="300" style = "display: block;">
+</div>
 :::
 :::

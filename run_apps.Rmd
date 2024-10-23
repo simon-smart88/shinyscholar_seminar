@@ -1,7 +1,7 @@
 
 ```{r}
-library(shinyscholar)
-runApp("~/Documents/shinyscholar/inst/shiny" , launch.browser = FALSE, port= 5000)
+library(disgapp)
+runApp("~/Documents/disagapp/inst/shiny" , launch.browser = FALSE, port= 5000)
 
 ```
 
