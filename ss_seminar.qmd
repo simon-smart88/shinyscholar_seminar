@@ -14,7 +14,7 @@ format:
     slide-number: true
 server: shiny
 date: "7 November 2024"
-preload-iframes: true
+preload-iframes: false
 ---
 
 ```{css}
@@ -69,7 +69,7 @@ font-size: 30px;
   width: 100%;
   margin-left: 200px;
   text-align: center;
-  font-size: 1em;
+  font-size: 0.7em;
   color: #264688;
   z-index: 2;
   margin-right: 250px;
@@ -111,6 +111,7 @@ library(dplyr)
 ## Overview
 
 -   What is Shiny?
+-   How should Shiny apps be developed?
 -   Use of Shiny in academia
 -   How Shinyscholar helps to avoid common problems
 -   Disagapp as an example application
@@ -136,9 +137,6 @@ library(dplyr)
 
 ## Data flows through an analysis in discrete steps 
 
--   Analytical apps have a flow of data through them
--   Similar to an analysis, but we are providing options for the user to take their own particular path
-
 <img src="images/data_pipeline.svg" class="centre_image" >
  
 ::: footer
@@ -146,6 +144,8 @@ library(dplyr)
 :::
  
 ::: {.notes}
+-   Analytical apps have a flow of data through them
+-   Similar to an analysis, but we are providing options for the user to take their own particular path
 -   Distinguish between datavis apps and analysis apps
 :::
 
@@ -172,11 +172,21 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 :::
 :::
 
+::: {.notes}
+-   Easier to develop than using other web frameworks
+- Existing code can be adapted
+:::
+
 ## Creating analytical apps lowers the barrier of entry
 
+- Provide guidance throughout a complex analysis
 - Enable users without coding skills to access cutting-edge analyses
-- Link to data pipeline - provide handrails for the user 
 - Enable access for restricted users e.g. in NHS
+
+::: {.notes}
+- Link to data pipeline - provide handrails for the user 
+
+:::
 
 ## Shinyscholar helps create high quality analytical applications
 
@@ -191,7 +201,13 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 :::
 :::
 
-## CRSU app
+## MetaBayesDTA
+![](images/metabayesdta.png)
+
+::: footer
+- Cerullo *et al.* (2018) <a href="https://doi.org/10.1186/s12874-023-01910-y" target="_blank">DOI: 10.1186/s12874-023-01910-y</a>
+- <a href="https://crsu.shinyapps.io/MetaBayesDTA/" target="_blank">https://crsu.shinyapps.io/MetaBayesDTA/</a>
+:::
 
 
 ## Soil Benchmark
@@ -202,16 +218,13 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 - <a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
 :::
 
-
 ## Kerus Cloud
 
 ![](images/kerus_cloud.png)
 
 ::: footer
 - <a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
-
 :::
-
 
 ## Shiny apps consist of a user interface object (UI) and a server object {.largecode}
 
@@ -426,9 +439,17 @@ testthat::expect_equal(output$answer, 100)
 
 ## Packages ease development and distribution of code
 
+::: columns
+::: {.column width="70%"}
 -   R packages parcel up code for distribution to others
 -   Many tools and processes rely on code being a package
 -   Enables installation in a single line
+:::
+::: {.column width="30%"}
+<img src="images/package.png" width="auto" height="auto" align="right" >
+:::
+:::
+
 
 ## 50 apps published in 2023 were surveyed to determine current practices
 
@@ -520,14 +541,17 @@ testthat::expect_equal(output$answer, 100)
 -   Each module calls a function
 -   Each module is reproduced by a markdown chunk
 -   Data is passed between modules through `common`
--   Files have the format of:
-    - function: `<component>_<module>_f.R`
-    - module: `<component>_<module>.R`
-    - markdown: `<component>_<module>.Rmd`
+
+## Each module has several files associated with it
+- Function: `<component>_<module>_f.R`
+- Module: `<component>_<module>.R`
+- Markdown: `<component>_<module>.Rmd`
+- Guidance `<component>_<module>.md`
+- Configuration `<component>_<module>.yml`
 
 ## {data-menu-title="Shinyscholar demo"}
 
-<iframe width="100%" height="100%" src="http://127.0.0.1:5000"></iframe>
+<iframe width="100%" height="100%" src="https://simonsmart.shinyapps.io/shinyscholar/"></iframe>
 
 ## Markdown files can be merged to replicate the analysis
 
@@ -536,24 +560,13 @@ testthat::expect_equal(output$answer, 100)
 -   Each chunk of the markdown calls the same function as the module in the app
 -   The chunks for used modules are combined into one `.Rmd` file
 
-## Input values are copied into the markdown
+## Input values are copied into the markdown {.mediumcode}
 ```{r eval = FALSE, echo = TRUE}
 #```{r, echo = {{select_query_knit}}, include = {{select_query_knit}}}
-poly <- matrix({{select_poly}}, ncol = 2, byrow = FALSE)
-token <- {{select_token}}
-ras <- select_query(poly, {{select_date}}, token)
-raster_name <- {{select_name}}
-
-raster_extent <- as.vector(terra::ext(ras))
-map_pal <- colorBin("Greens", domain = values(ras), bins = 9, na.color = "#00000000")
-
-leaflet() %>%
-  addProviderTiles("Esri.WorldTopoMap") %>%
-  addRasterImage(ras, colors = map_pal) %>%
-  addTiles(urlTemplate = "", attribution = "MODIS data via LAADS DAAC") %>%
-  fitBounds(lng1 = raster_extent[[1]], lng2 = raster_extent[[2]], lat1 = raster_extent[[3]], lat2 = raster_extent[[4]]) %>%
-  addLegend(position = "bottomright", pal = map_pal, values = values(ras),
-            title = raster_name) 
+poly <- matrix({{select_query_poly}}, ncol = 2, byrow = FALSE)
+token <- {{select_query_token}}
+ras <- select_query(poly, {{select_query_date}}, token)
+raster_name <- {{select_query_name}}
 #```
 ```
 
@@ -565,17 +578,6 @@ poly <- matrix(c(-1.54202000000001, -1.54202000000001, -0.718278999999995, -0.71
 token <- NULL
 ras <- select_query(poly, "2024-10-09", token)
 raster_name <- "FAPAR"
-
-raster_extent <- as.vector(terra::ext(ras))
-map_pal <- colorBin("Greens", domain = terra::values(ras), bins = 9, na.color = "#00000000")
-
-leaflet() %>%
-  addProviderTiles("Esri.WorldTopoMap") %>%
-  addRasterImage(ras, colors = map_pal) %>%
-  addTiles(urlTemplate = "", attribution = "MODIS data via LAADS DAAC") %>%
-  fitBounds(lng1 = raster_extent[[1]], lng2 = raster_extent[[2]], lat1 = raster_extent[[3]], lat2 = raster_extent[[4]]) %>%
-  addLegend(position = "bottomright", pal = map_pal, values = terra::values(ras),
-            title = raster_name) 
 #```
 ```
 
@@ -591,7 +593,8 @@ modules <- data.frame(
 "map" = c(TRUE, TRUE, FALSE, FALSE),
 "result" = c(FALSE, FALSE, TRUE, TRUE),
 "rmd" = c(TRUE, TRUE, TRUE, TRUE),
-"save" = c(TRUE, TRUE, TRUE, TRUE))
+"save" = c(TRUE, TRUE, TRUE, TRUE),
+"async" = c(TRUE, TRUE, TRUE, TRUE))
 
 common_objects = c("raster", "histogram", "scatter")
 
@@ -599,6 +602,8 @@ shinyscholar::create_template(
   path = file.path("~", "Documents"), name = "demo", author = "Simon E. H. Smart",
   include_map = TRUE, include_table = TRUE, include_code = TRUE, 
   common_objects = common_objects, modules = modules, install = TRUE)
+
+demo::run_demo()
 ```
 
 ::: {.notes}
