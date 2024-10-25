@@ -17,6 +17,8 @@ date: "7 November 2024"
 preload-iframes: false
 ---
 
+## Overview
+
 ```{css}
 
 .reveal pre.sourceCode code{
@@ -103,18 +105,11 @@ margin-bottom: 30px;
 
 ```
 
-```{r eval=TRUE, echo=FALSE}
-library(shiny)
-library(dplyr)
-```
-
-## Overview
-
 -   What is Shiny?
 -   How should Shiny apps be developed?
 -   Use of Shiny in academia
 -   How Shinyscholar helps to avoid common problems
--   Disagapp as an example application
+-   Disagapp as an example app 
 
 ## About me
 
@@ -185,30 +180,15 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ::: {.notes}
 - Link to data pipeline - provide handrails for the user 
-
-:::
-
-## Shinyscholar helps create high quality analytical applications
-
-::: columns
-::: {.column width="70%"}
--   Creates an empty application with a regular structure
--   Make it easier to follow software development best practices
--   Developers can concentrate on creating functionality 
-:::
-::: {.column width="30%"}
-<img src="images/ss_logo.png" width="auto" height="auto" align="right" >
-:::
 :::
 
 ## MetaBayesDTA
 ![](images/metabayesdta.png)
 
 ::: footer
-- Cerullo *et al.* (2018) <a href="https://doi.org/10.1186/s12874-023-01910-y" target="_blank">DOI: 10.1186/s12874-023-01910-y</a>
+- Cerullo *et al.* (2023) <a href="https://doi.org/10.1186/s12874-023-01910-y" target="_blank">DOI: 10.1186/s12874-023-01910-y</a>
 - <a href="https://crsu.shinyapps.io/MetaBayesDTA/" target="_blank">https://crsu.shinyapps.io/MetaBayesDTA/</a>
 :::
-
 
 ## Soil Benchmark
 
@@ -224,6 +204,19 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 
 ::: footer
 - <a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
+:::
+
+## Shinyscholar helps create high quality analytical applications
+
+::: columns
+::: {.column width="70%"}
+-   Creates an empty application with a regular structure
+-   Make it easier to follow software development best practices
+-   Developers can concentrate on creating functionality 
+:::
+::: {.column width="30%"}
+<img src="images/ss_logo.png" width="auto" height="auto" align="right" >
+:::
 :::
 
 ## Shiny apps consist of a user interface object (UI) and a server object {.largecode}
@@ -397,16 +390,14 @@ multiply_by_ten <- function(x){
 ## Modules enable apps to be broken down into self-contained chunks
 
 ::: columns
-::: {.column width="70%"}
+::: {.column width="80%"}
 -   Inputs and outputs for different parts are separated
 -   Simplifies naming of objects
 -   Easier to navigate files and maintain code
-::: {.fragment .fade-in}
 -   But they need to be able to communicate...
 :::
-:::
-::: {.column width="30%"}
-<img src="images/modules.svg" width="auto" height="auto" align="right" >
+::: {.column width="20%"}
+<img src="images/modules.svg" align="right" height = 500px >
 :::
 :::
 
@@ -621,9 +612,8 @@ demo::run_demo()
 
 :::
 
-## Boring, repetitive coding tasks are automated 
+## Boring, repetitive coding tasks are automated {.mediumcode}
 
--   Code required for saving/loading and reproducibility is repetitive
 -   `save_and_load()` and `metadata()` automate these parts
 
 ```{r echo = TRUE, eval = FALSE}
@@ -637,6 +627,10 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 
 ```
 
+::: {.notes}
+-   Code required for saving/loading and reproducibility is repetitive
+:::
+
 ## Slow operations can be run asynchronously
 
 -   R runs on a single thread
@@ -646,11 +640,15 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 ## Disaggregation regression enables high resolution disease mapping
 
 ::: columns
-::: {.column width="50%"}
-<img src="images/mad_shape.png" class="centre_image">
+::: {.column width="20%"}
 :::
-::: {.column width="50%"}
-<img src="images/mad_pred.png" class="centre_image">
+::: {.column width="30%"}
+<img src="images/mad_shape.png" >
+:::
+::: {.column width="30%"}
+<img src="images/mad_pred.png">
+:::
+::: {.column width="20%"}
 :::
 :::
 

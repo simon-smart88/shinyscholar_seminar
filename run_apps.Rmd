@@ -1,7 +1,6 @@
-
 ```{r}
-library(disgapp)
+library(disagapp)
 runApp("~/Documents/disagapp/inst/shiny" , launch.browser = FALSE, port= 5000)
 
-```
 
+```
