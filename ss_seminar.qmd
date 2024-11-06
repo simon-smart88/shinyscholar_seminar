@@ -444,38 +444,13 @@ testthat::expect_equal(output$answer, 100)
 :::
 :::
 
-
 ## 50 apps published in 2023 were surveyed to determine current practices
-
--   For each, the papers, apps and source code examined
--   Papers:
-    -   Do they cite packages?
-    -   Do they provide source code?
-
-## Each app was examined to determine:
-
--   Are they usable?
--   Are they online?
--   Do they provide instructions and explanation?
--   Do they cite packages?
--   Are they reproducible?
--   Can errors be returned to the user?
--   Can you save / load?
-
-## Where available, source code was examined to determine:
-
--   How many lines of code?
--   Is it a package?
--   Are there functions?
--   Are there modules?
--   Are there tests?
-
-## Few existing apps have these characteristics
 
 <img src="images/app_features.svg" class="centre_image" >
 
 ::: {.notes}
 - Caveat: not all were analytical applications
+- i.e. whilst best practice, they are not used due to the difficulty of implementation
 :::
 
 ## The size and structure of codebases varied substantially
@@ -512,23 +487,6 @@ testthat::expect_equal(output$answer, 100)
 -  Removed all the modules
 -  Adapted files so they could be edited programmatically
 
-## There were still areas where Wallace could be improved upon
-
--   Complex interface may be difficult to navigate
--   Server function was still 1500 lines long
--   Only unit tests, no end-to-end tests
--   Potential issues with long-term reproducibility
--   Not deployed online
-
-## Several changes were made to address these issues
-
--   Added a guided tour using `{rintrojs}`
--   Moved code for mapping, saving and loading to modules
--   Added end-to-end tests
--   Use `{renv}` to capture the precise environment
--   Added a Dockerfile to enable easier cloud deployment
--   Code for each module can be viewed in the app
-
 ## Shinyscholar enforces a strict structure
 
 -   Analyses are split into components and modules
@@ -544,9 +502,25 @@ testthat::expect_equal(output$answer, 100)
 -   Configuration: `<component>_<module>.yml`
 -   Tests: `test-<component>_<module>.R`
 
-## {data-menu-title="Shinyscholar demo"}
+## {data-menu-title="Shinyscholar intro"}
 
-<iframe width="100%" height="100%" src="https://simonsmart.shinyapps.io/shinyscholar/"></iframe>
+![](images/ss_intro.png)
+
+## {data-menu-title="Shinyscholar guidance"}
+
+![](images/ss_guidance.png)
+
+## {data-menu-title="Shinyscholar code"}
+
+![](images/ss_code.png)
+
+## {data-menu-title="Shinyscholar query"}
+
+![](images/ss_query.png)
+
+## {data-menu-title="Shinyscholar plot"}
+
+![](images/ss_plot.png)
 
 ::: {.notes}
 - Point out guidance and attribution
@@ -582,9 +556,10 @@ raster_name <- "FAPAR"
 #```
 ```
 
-## `create_template()` creates an empty app
+## `create_template()` creates an empty app {.mediumcode}
 
-```{r eval = FALSE, echo = TRUE}
+```{r eval = TRUE, echo = FALSE}
+
 modules <- data.frame(
 "component" = c("load", "load", "plot", "plot"),
 "long_component" = c("Load data", "Load data", "Plot data", "Plot data"),
@@ -596,6 +571,14 @@ modules <- data.frame(
 "rmd" = c(TRUE, TRUE, TRUE, TRUE),
 "save" = c(TRUE, TRUE, TRUE, TRUE),
 "async" = c(TRUE, TRUE, TRUE, TRUE))
+
+```
+
+```{r val = TRUE, echo = FALSE}
+knitr::kable(modules,format = "html")
+```
+
+```{r eval = FALSE, echo = TRUE}
 
 common_objects = c("raster", "histogram", "scatter")
 
@@ -611,6 +594,10 @@ demo::run_demo()
  - Forces a design phase upon developers
 
 :::
+
+## {data-menu-title="Shinyscholar template"}
+
+![](images/ss_template.png)
 
 ## Boring, repetitive coding tasks are automated {.mediumcode}
 
@@ -666,7 +653,7 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 -  Shiny apps are easy to create and help disseminate methods
 -  Current software development practices in academic apps could be improved
 -  Shinyscholar helps create apps that are:
-    - Open, attributable, instructive, reproducible reliable and maintainable
+    - Open, attributable, instructive, reproducible, reliable and maintainable
 
 ## Github
 

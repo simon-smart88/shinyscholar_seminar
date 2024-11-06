@@ -988,6 +988,7 @@ margin-bottom: 30px;
 <img src="images/app_features.svg" class="centre_image r-stretch"><aside class="notes">
 <ul>
 <li>Caveat: not all were analytical applications</li>
+<li>i.e.&nbsp;whilst best practice, they are not used due to the difficulty of implementation</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1043,27 +1044,6 @@ margin-bottom: 30px;
 <li>Adapted files so they could be edited programmatically</li>
 </ul>
 </section>
-<section id="there-were-still-areas-where-wallace-could-be-improved-upon" class="slide level2">
-<h2>There were still areas where Wallace could be improved upon</h2>
-<ul>
-<li>Complex interface may be difficult to navigate</li>
-<li>Server function was still 1500 lines long</li>
-<li>Only unit tests, no end-to-end tests</li>
-<li>Potential issues with long-term reproducibility</li>
-<li>Not deployed online</li>
-</ul>
-</section>
-<section id="several-changes-were-made-to-address-these-issues" class="slide level2">
-<h2>Several changes were made to address these issues</h2>
-<ul>
-<li>Added a guided tour using <code>{rintrojs}</code></li>
-<li>Moved code for mapping, saving and loading to modules</li>
-<li>Added end-to-end tests</li>
-<li>Use <code>{renv}</code> to capture the precise environment</li>
-<li>Added a Dockerfile to enable easier cloud deployment</li>
-<li>Code for each module can be viewed in the app</li>
-</ul>
-</section>
 <section id="shinyscholar-enforces-a-strict-structure" class="slide level2">
 <h2>Shinyscholar enforces a strict structure</h2>
 <ul>
@@ -1084,11 +1064,26 @@ margin-bottom: 30px;
 <li>Tests: <code>test-&lt;component&gt;_&lt;module&gt;.R</code></li>
 </ul>
 </section>
-<section id="section" class="slide level2" data-menu-title="Shinyscholar demo">
+<section id="section" class="slide level2" data-menu-title="Shinyscholar intro">
 <h2></h2>
-<iframe width="100%" height="100%" src="https://simonsmart.shinyapps.io/shinyscholar/">
-</iframe>
-<aside class="notes">
+
+<img data-src="images/ss_intro.png" class="r-stretch"></section>
+<section id="section-1" class="slide level2" data-menu-title="Shinyscholar guidance">
+<h2></h2>
+
+<img data-src="images/ss_guidance.png" class="r-stretch"></section>
+<section id="section-2" class="slide level2" data-menu-title="Shinyscholar code">
+<h2></h2>
+
+<img data-src="images/ss_code.png" class="r-stretch"></section>
+<section id="section-3" class="slide level2" data-menu-title="Shinyscholar query">
+<h2></h2>
+
+<img data-src="images/ss_query.png" class="r-stretch"></section>
+<section id="section-4" class="slide level2" data-menu-title="Shinyscholar plot">
+<h2></h2>
+
+<img data-src="images/ss_plot.png" class="r-stretch"><aside class="notes">
 <ul>
 <li>Point out guidance and attribution</li>
 <li>Code</li>
@@ -1137,29 +1132,84 @@ margin-bottom: 30px;
 <span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="create_template-creates-an-empty-app" class="slide level2">
+<section id="create_template-creates-an-empty-app" class="slide level2 mediumcode">
 <h2><code>create_template()</code> creates an empty app</h2>
+<div class="cell" data-val="true">
+<div class="cell-output-display">
+<table class="caption-top" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">component</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">long_component</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">module</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">long_module</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">map</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">result</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">rmd</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">save</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">async</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">load</td>
+<td style="text-align: left;">Load data</td>
+<td style="text-align: left;">user</td>
+<td style="text-align: left;">Upload your own data</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">load</td>
+<td style="text-align: left;">Load data</td>
+<td style="text-align: left;">database</td>
+<td style="text-align: left;">Query a database to obtain data</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">plot</td>
+<td style="text-align: left;">Plot data</td>
+<td style="text-align: left;">histogram</td>
+<td style="text-align: left;">Plot the data as a histogram</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">plot</td>
+<td style="text-align: left;">Plot data</td>
+<td style="text-align: left;">scatter</td>
+<td style="text-align: left;">Plot the data as a scatterplot</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>modules <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"component"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"load"</span>, <span class="st">"load"</span>, <span class="st">"plot"</span>, <span class="st">"plot"</span>),</span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"long_component"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Load data"</span>, <span class="st">"Load data"</span>, <span class="st">"Plot data"</span>, <span class="st">"Plot data"</span>),</span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"module"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"user"</span>, <span class="st">"database"</span>, <span class="st">"histogram"</span>, <span class="st">"scatter"</span>),</span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"long_module"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Upload your own data"</span>, <span class="st">"Query a database to obtain data"</span>, </span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Plot the data as a histogram"</span>, <span class="st">"Plot the data as a scatterplot"</span>),</span>
-<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"map"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>),</span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"result"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"rmd"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"save"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">"async"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb8-12"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="" aria-hidden="true" tabindex="-1"></a>common_objects <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"raster"</span>, <span class="st">"histogram"</span>, <span class="st">"scatter"</span>)</span>
-<span id="cb8-14"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="" aria-hidden="true" tabindex="-1"></a>shinyscholar<span class="sc">::</span><span class="fu">create_template</span>(</span>
-<span id="cb8-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="fu">file.path</span>(<span class="st">"~"</span>, <span class="st">"Documents"</span>), <span class="at">name =</span> <span class="st">"demo"</span>, <span class="at">author =</span> <span class="st">"Simon E. H. Smart"</span>,</span>
-<span id="cb8-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">include_map =</span> <span class="cn">TRUE</span>, <span class="at">include_table =</span> <span class="cn">TRUE</span>, <span class="at">include_code =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb8-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">common_objects =</span> common_objects, <span class="at">modules =</span> modules, <span class="at">install =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-19"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="" aria-hidden="true" tabindex="-1"></a>demo<span class="sc">::</span><span class="fu">run_demo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>common_objects <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"raster"</span>, <span class="st">"histogram"</span>, <span class="st">"scatter"</span>)</span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>shinyscholar<span class="sc">::</span><span class="fu">create_template</span>(</span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="fu">file.path</span>(<span class="st">"~"</span>, <span class="st">"Documents"</span>), <span class="at">name =</span> <span class="st">"demo"</span>, <span class="at">author =</span> <span class="st">"Simon E. H. Smart"</span>,</span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">include_map =</span> <span class="cn">TRUE</span>, <span class="at">include_table =</span> <span class="cn">TRUE</span>, <span class="at">include_code =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">common_objects =</span> common_objects, <span class="at">modules =</span> modules, <span class="at">install =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>demo<span class="sc">::</span><span class="fu">run_demo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <ul>
@@ -1177,6 +1227,10 @@ margin-bottom: 30px;
           display:block!important;
       }</style></aside>
 </section>
+<section id="section-5" class="slide level2" data-menu-title="Shinyscholar template">
+<h2></h2>
+
+<img data-src="images/ss_template.png" class="r-stretch"></section>
 <section id="boring-repetitive-coding-tasks-are-automated" class="slide level2 mediumcode">
 <h2>Boring, repetitive coding tasks are automated</h2>
 <ul>
@@ -1236,7 +1290,7 @@ margin-bottom: 30px;
 <h2>Modules are classified depending on their necessity</h2>
 
 <img src="images/disagg_modules_path.svg" class="centre_image r-stretch"></section>
-<section id="section-1" class="slide level2" data-menu-title="Disagapp demo">
+<section id="section-6" class="slide level2" data-menu-title="Disagapp demo">
 <h2></h2>
 <iframe width="100%" height="100%" src="http://127.0.0.1:5000">
 </iframe>
@@ -1248,7 +1302,7 @@ margin-bottom: 30px;
 <li>Current software development practices in academic apps could be improved</li>
 <li>Shinyscholar helps create apps that are:
 <ul>
-<li>Open, attributable, instructive, reproducible reliable and maintainable</li>
+<li>Open, attributable, instructive, reproducible, reliable and maintainable</li>
 </ul></li>
 </ul>
 </section>
@@ -1316,7 +1370,7 @@ ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]}},"value":[{"type":"character","attributes":{},"value":["base","cli","compiler","datasets","digest","evaluate","fastmap","graphics","grDevices","htmltools","httpuv","jsonlite","knitr","later","lifecycle","magrittr","methods","mime","promises","R6","Rcpp","rlang","rmarkdown","rstudioapi","shiny","stats","tools","utils","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["4.3.2","3.6.3","4.3.2","4.3.2","0.6.37","1.0.1","1.2.0","4.3.2","4.3.2","0.5.8.1","1.6.15","1.8.9","1.48","1.3.2","1.0.4","2.0.3","4.3.2","0.12","1.3.0","2.5.1","1.0.13","1.1.4","2.28","0.16.0","1.9.1","4.3.2","4.3.2","4.3.2","0.48","1.8-4","2.3.10"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]}},"value":[{"type":"character","attributes":{},"value":["base","cli","compiler","datasets","digest","evaluate","fastmap","graphics","grDevices","highr","htmltools","httpuv","jsonlite","knitr","later","lifecycle","magrittr","methods","mime","promises","R6","Rcpp","rlang","rmarkdown","rstudioapi","shiny","stats","tools","utils","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["4.3.2","3.6.3","4.3.2","4.3.2","0.6.37","1.0.1","1.2.0","4.3.2","4.3.2","0.11","0.5.8.1","1.6.15","1.8.9","1.48","1.3.2","1.0.4","2.0.3","4.3.2","0.12","1.3.0","2.5.1","1.0.13","1.1.4","2.28","0.16.0","1.9.1","4.3.2","4.3.2","4.3.2","0.48","1.8-4","2.3.10"]}]}]}
 </script>
 <!--/html_preserve-->
 <div class="quarto-auto-generated-content">
