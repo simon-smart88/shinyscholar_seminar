@@ -102,27 +102,49 @@ width: 50% !important;
 margin-bottom: 30px;
 }
 
+input {
+  height: 60px;
+  width: 300px;
+  font-size: 1em;
+}
 
 ```
 
 -   What is Shiny?
--   How should Shiny apps be developed?
+-   Best practices in Shiny development
 -   Use of Shiny in academia
 -   How Shinyscholar helps to avoid common problems
 -   Disagapp as an example app 
 
 ## About me
 
+::: columns
+::: {.column width="60%"}
 -   Background in plant sciences and agricultural science
 -   Latecomer to R, starting in 2018
 -   Software developer in the Biostats group with Tim Lucas
+:::
+::: {.column width="10%"}
+:::
+::: {.column width="30%"}
+<img src= "images/me.jpg" >
+:::
+:::
 
 ## Shiny enables the creation of applications in R
-
+::: columns
+::: {.column width="70%"}
 -   R package developed by Posit/Rstudio, first released in 2012
 -   Framework for developing interactive applications using R
 -   Can run locally or online
 -   Make it much easier to share code with non R-users
+:::
+::: {.column width="30%"}
+
+<img src= "images/shiny.svg" >
+:::
+:::
+
 
 ::: {.notes}
 - Anything in R can be made GUI with Shiny
@@ -183,7 +205,7 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 :::
 
 ## MetaBayesDTA
-![](images/metabayesdta.png)
+<img src="images/metabayesdta.png" class="centre_image" >
 
 ::: footer
 - Cerullo *et al.* (2023) <a href="https://doi.org/10.1186/s12874-023-01910-y" target="_blank">DOI: 10.1186/s12874-023-01910-y</a>
@@ -191,32 +213,18 @@ lines(seq(2012, 2023, 0.1), exp(predict(mod, data.frame(year = seq(2012, 2023, 0
 :::
 
 ## Soil Benchmark
+<img src="images/soil_benchmark.png" class="centre_image" >
 
-![](images/soil_benchmark.png)
 
 ::: footer
 - <a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a>
 :::
 
 ## Kerus Cloud
-
-![](images/kerus_cloud.png)
+<img src="images/kerus_cloud.png" class="centre_image" >
 
 ::: footer
 - <a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a>
-:::
-
-## Shinyscholar helps create high quality analytical applications
-
-::: columns
-::: {.column width="70%"}
--   Creates an empty application with a regular structure
--   Make it easier to follow software development best practices
--   Developers can concentrate on creating functionality 
-:::
-::: {.column width="30%"}
-<img src="images/ss_logo.png" width="auto" height="auto" align="right" >
-:::
 :::
 
 ## Shiny apps consist of a user interface object (UI) and a server object {.largecode}
@@ -486,6 +494,20 @@ testthat::expect_equal(output$answer, 100)
 -  Lots of useful features that are difficult to implement
 -  Removed all the modules
 -  Adapted files so they could be edited programmatically
+-  Made various changes to add functionality 
+
+## Shinyscholar helps create high quality analytical applications
+
+::: columns
+::: {.column width="70%"}
+-   Creates an empty application with a regular structure
+-   Make it easier to follow software development best practices
+-   Developers can concentrate on creating functionality 
+:::
+::: {.column width="30%"}
+<img src="images/ss_logo.png" width="auto" height="auto" align="right" >
+:::
+:::
 
 ## Shinyscholar enforces a strict structure
 
@@ -493,68 +515,7 @@ testthat::expect_equal(output$answer, 100)
 -   Each module calls a function
 -   Each module is reproduced by a markdown chunk
 -   Data is passed between modules through `common`
-
-## Each module has several files associated with it
--   Function: `<component>_<module>_f.R`
--   Module: `<component>_<module>.R`
--   Markdown: `<component>_<module>.Rmd`
--   Guidance: `<component>_<module>.md`
--   Configuration: `<component>_<module>.yml`
--   Tests: `test-<component>_<module>.R`
-
-## {data-menu-title="Shinyscholar intro"}
-
-![](images/ss_intro.png)
-
-## {data-menu-title="Shinyscholar guidance"}
-
-![](images/ss_guidance.png)
-
-## {data-menu-title="Shinyscholar code"}
-
-![](images/ss_code.png)
-
-## {data-menu-title="Shinyscholar query"}
-
-![](images/ss_query.png)
-
-## {data-menu-title="Shinyscholar plot"}
-
-![](images/ss_plot.png)
-
-::: {.notes}
-- Point out guidance and attribution
-- Code
-- That it is apparent from the UI where code is located
-:::
-
-## Markdown files can be merged to replicate the analysis
-
--   When a module is used an object becomes `TRUE`
--   Input values are stored and *knitted* into the markdown
--   Each chunk of the markdown calls the same function as the module in the app
--   The chunks for used modules are combined into one `.Rmd` file
-
-## Input values are copied into the markdown {.mediumcode}
-```{r eval = FALSE, echo = TRUE}
-#```{r, echo = {{select_query_knit}}, include = {{select_query_knit}}}
-poly <- matrix({{select_query_poly}}, ncol = 2, byrow = FALSE)
-token <- {{select_query_token}}
-ras <- select_query(poly, {{select_query_date}}, token)
-raster_name <- {{select_query_name}}
-#```
-```
-
-## To create a reproducible chunk {.mediumcode}
-
-```{r eval = FALSE, echo = TRUE}
-#```{r}
-poly <- matrix(c(-1.54202, -1.54202, -0.718279, -0.718279, -1.54202, 52.509368, 52.789309, 52.789309, 52.509368, 52.509368), ncol = 2, byrow = FALSE)
-token <- NULL
-ras <- select_query(poly, "2024-10-09", token)
-raster_name <- "FAPAR"
-#```
-```
+-   Apps are distributed as packages
 
 ## `create_template()` creates an empty app {.mediumcode}
 
@@ -592,13 +553,88 @@ demo::run_demo()
 
 ::: {.notes}
  - Forces a design phase upon developers
-
 :::
 
-## {data-menu-title="Shinyscholar template"}
+## New apps can also be generated inside the shinyscholar app
+<img src="images/ss_template.png" class="centre_image" >
 
-![](images/ss_template.png)
+## Developers can then start developing modules
+<img src="images/demo.png" class="centre_image" >
 
+## Each module has several files associated with it
+-   The component and module names are merged to create an identifier e.g. `load_user`
+
+::: columns
+::: {.column width="50%"}
+-   Function: `<id>_f.R`
+-   Module: `<id>.R`
+-   Markdown: `<id>.Rmd`
+:::
+::: {.column width="50%"}
+-   Guidance: `<id>.md`
+-   Configuration: `<id>.yml`
+-   Tests: `test-<id>.R`
+:::
+:::
+
+## {data-menu-title="Shinyscholar intro"}
+<img src="images/ss_intro.png" class="centre_image" >
+
+## {data-menu-title="Shinyscholar guidance"}
+<img src="images/ss_guidance.png" class="centre_image" >
+
+::: {.notes}
+- Point out guidance and attribution
+:::
+
+## {data-menu-title="Shinyscholar code"}
+<img src="images/ss_code.png" class="centre_image" >
+
+::: {.notes}
+- Easy to understand what code is doing what
+:::
+
+## {data-menu-title="Shinyscholar query"}
+<img src="images/ss_query.png" class="centre_image" >
+
+::: {.notes}
+- Logger contains details
+:::
+
+## {data-menu-title="Shinyscholar plot"}
+<img src="images/ss_plot.png" class="centre_image" >
+
+## {data-menu-title="Shinyscholar plot"}
+<img src="images/ss_reprod.png" class="centre_image" >
+
+## Markdown files can be merged to replicate the analysis
+
+-   When a module is used an object becomes `TRUE`
+-   Input values are stored and *knitted* into the markdown
+-   Each chunk of the markdown calls the same function as the module in the app
+-   The chunks for used modules are combined into one `.Rmd` file
+
+## Input values are copied into the markdown {.mediumcode}
+```{r eval = FALSE, echo = TRUE}
+#```{r, echo = {{select_query_knit}}, include = {{select_query_knit}}}
+poly <- matrix({{select_query_poly}}, ncol = 2, byrow = FALSE)
+token <- {{select_query_token}}
+ras <- select_query(poly, {{select_query_date}}, token)
+raster_name <- {{select_query_name}}
+#```
+```
+
+## To create a reproducible chunk {.mediumcode}
+
+```{r eval = FALSE, echo = TRUE}
+#```{r}
+poly <- matrix(c(-1.54202, -1.54202, -0.718279, -0.718279, -1.54202, 52.509368, 
+                 52.789309, 52.789309, 52.509368, 52.509368), ncol = 2, byrow = FALSE)
+token <- NULL
+ras <- select_query(poly, "2024-10-09", token)
+raster_name <- "FAPAR"
+#```
+```
 ## Boring, repetitive coding tasks are automated {.mediumcode}
 
 -   `save_and_load()` and `metadata()` automate these parts
@@ -617,12 +653,6 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 ::: {.notes}
 -   Code required for saving/loading and reproducibility is repetitive
 :::
-
-## Slow operations can be run asynchronously
-
--   R runs on a single thread
--   Slow steps (fitting a model) can block others from using the app
--   If `async = TRUE` the modules are created so that functions run in the background
 
 ## Disaggregation regression enables high resolution disease mapping
 
@@ -648,6 +678,16 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 ## {data-menu-title="Disagapp demo"}
 <iframe width="100%" height="100%" src="http://127.0.0.1:5000"></iframe>
 
+## The same analysis reproduced
+```{r}
+#| echo: false
+#| warning: false
+#| class-output: "sourceCode r"
+
+cat(readLines("disagapp-session.Rmd"), sep = "\n")
+```
+
+
 ## Summary
 
 -  Shiny apps are easy to create and help disseminate methods
@@ -655,7 +695,7 @@ comp_mod_number <- common$meta$comp_mod$number # transfer to Rmd
 -  Shinyscholar helps create apps that are:
     - Open, attributable, instructive, reproducible, reliable and maintainable
 
-## Github
+## Github resources
 
 -  <a href="https://github.com/simon-smart88 " target="_blank">https://github.com/simon-smart88</a>
 -   shinyscholar

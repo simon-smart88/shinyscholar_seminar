@@ -1,0 +1,217 @@
+disagapp Session 2024-11-07
+================
+
+Please find below the R code history from your *disagapp* v1.0.0
+session.
+
+You can reproduce your session results by running this R Markdown file
+in RStudio.
+
+Each code block is called a “chunk”, and you can run them either
+one-by-one or all at once by choosing an option in the “Run” menu at the
+top-right corner of the “Source” pane in RStudio. The file can also be
+rendered into an html file using `rmarkdown::render()` which will
+contain all of the outputs alongside the code used to generate them.
+
+For more detailed information see <http://rmarkdown.rstudio.com>.
+
+### Package installation
+
+disagapp uses the following R packages that must be installed and loaded
+before starting.
+
+```{r}
+library(terra)
+library(leaflet)
+library(disaggregation)
+library(disagapp)
+
+#create empty list to store covariate data
+covariates <- list()
+
+#set a seed
+set.seed(319)
+```
+
+The *disagapp* session code .Rmd file is composed of a chain of module
+functions that are internal to *disagapp*. Each of these functions
+corresponds to a single module that the user ran during the session. To
+see the internal code for these module functions, click on the links in
+the .Rmd file. Users are encouraged to write custom code in the .Rmd
+directly to modify their analysis, and even modify the module function
+code to further customize. To see the source code for any module
+function, just type its name into the R console and press Return.
+
+Your analyses are below.
+
+------------------------------------------------------------------------
+
+Load the selected example dataset
+
+```{r}
+dataset <- "mad"
+switch(dataset,
+       "mad" = {
+         shpdf <- data.frame(datapath = list.files(system.file("extdata", "shapes", package="disagapp"), full.names = TRUE),
+                             name = list.files(system.file("extdata", "shapes", package="disagapp")))
+         shape <- resp_shape(shpdf)
+         },
+       "nys" = {
+         shape <- SpatialEpi::NYleukemia_sf
+       },
+       "scot" = {
+         shape <- SpatialEpi::scotland_sf
+         shape$geometry <- shape$geometry * 1000
+         shape <- sf::st_set_crs(shape, 27700)
+         shape <- sf::st_transform(shape, crs = 4326)
+       }
+)
+```
+
+Load accessibility data and add to covariates list
+
+```{r}
+access <- disagapp::cov_access(shape, "Travel Time to Cities (2015)")
+covariates[["Travel Time to Cities (2015)"]] <- access
+```
+
+Download bioclim data and add to covariates list
+
+```{r}
+bioclim <- disagapp::cov_bioclim(shape, "MDG", c("Mean temperature", "Total precipitation"))
+covariates <- append(covariates, bioclim)
+```
+
+Download land use data and add to covariates list
+
+```{r}
+land_use <- disagapp::cov_landuse(shape, 2019, c("BuiltUp", "Crops"))
+covariates <- append(covariates, land_use)
+```
+
+Download population count data from Worldpop
+
+```{r}
+aggregation <- disagapp::agg_worldpop(shape, "MDG", "Constrained", "1km", 2020)
+```
+
+Build the spatial mesh
+
+```{r}
+mesh <- disaggregation::build_mesh(shape, 
+                                   mesh_args = list(
+                                    convex = -0.01,
+                                    concave = -0.5,
+                                    resolution = 300,
+                                    max.edge = c(1.5, 3.1), 
+                                    cutoff = 0.05,
+                                    offset = c(1.5, 3.1)))
+```
+
+Prepare the covariates and aggregation raster so that their extent and
+resolution match, enabling them to be stacked into a single SpatRaster
+
+```{r}
+#temporarily add the aggregation raster to the covariates list
+covariates$aggregation <- aggregation
+
+#prepare the summary
+covariate_summary <- prep_summary(covariates, remove = FALSE)
+
+#show the table
+DT::datatable(covariate_summary)
+```
+
+```{r}
+covariates$aggregation <- NULL
+covariates_prepared <- lapply(covariates, terra::resample, covariates[["BuiltUp land use"]])
+
+#store and then remove the prepared aggregation raster
+aggregation_prepared <- terra::resample(aggregation, covariates[["BuiltUp land use"]], method = "sum")
+
+#convert the list of SpatRasters into a multi-layered SpatRaster
+covariates_prepared <- terra::rast(covariates_prepared)
+```
+
+Scale the covariates and store the parameters for potential reuse
+
+```{r}
+scaled_covariate_output <- prep_scale(covariates_prepared)
+
+covariates_prepared <- scaled_covariate_output[["covariates"]]
+scaling_parameters <- scaled_covariate_output[["parameters"]]
+```
+
+Reduce resolution of covariates and aggregation raster
+
+```{r}
+covariates_prepared <- terra::aggregate(covariates_prepared, fact = 4, fun = "mean")
+aggregation_prepared <- terra::aggregate(aggregation_prepared, fact = 4, fun = "sum")
+```
+
+Plot a correlation matrix of the prepared covariates
+
+```{r}
+correlation_matrix <- disagapp::prep_correlation(covariates_prepared)
+
+corrplot::corrplot(correlation_matrix, 
+                   method = "circle",
+                   type = "lower",
+                   diag = FALSE)
+```
+
+Prepare the data for fitting the model and plot a summary.
+
+```{r}
+prepared_data <- disaggregation::prepare_data(polygon_shapefile = shape,
+                                     covariate_rasters = covariates_prepared,
+                                     aggregation_raster = aggregation_prepared,
+                                     id_var = "ID_2",
+                                     response_var = "inc",
+                                     na_action = TRUE,
+                                     make_mesh = FALSE)
+
+prepared_data$mesh <- mesh
+
+plot(prepared_data)
+```
+
+Fit the model
+
+```{r}
+# Create NULL priors if they have not been set
+if (!exists("priors")) {
+  priors <- NULL
+}
+
+fitted_model <- disaggregation::disag_model(data = prepared_data,
+                                            priors = priors,
+                                            family = "poisson",
+                                            link = "log",
+                                            iterations = 100,
+                                            field = TRUE,
+                                            iid = TRUE
+                                            )
+```
+
+Generate predictions from the model
+
+```{r}
+prediction <- disaggregation::predict_model(fitted_model, predict_iid = TRUE)
+
+plot(prediction$prediction)
+
+prediction$cases <- prediction$prediction * aggregation_prepared
+
+plot(prediction$cases)
+
+if (!is.null(prediction$field)){
+  terra::crs(prediction$field) <- terra::crs(prepared_data$covariate_rasters[[1]])
+  prediction$field <- terra::mask(prediction$field, prepared_data$covariate_rasters[[1]])
+  plot(prediction$field)  
+}
+
+if (!is.null(prediction$iid)){
+  plot(prediction$iid)  
+}
+```

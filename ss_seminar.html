@@ -493,12 +493,17 @@ width: 50% !important;
 margin-bottom: 30px;
 }
 
+input {
+  height: 60px;
+  width: 300px;
+  font-size: 1em;
+}
 
 </style>
 </div>
 <ul>
 <li>What is Shiny?</li>
-<li>How should Shiny apps be developed?</li>
+<li>Best practices in Shiny development</li>
 <li>Use of Shiny in academia</li>
 <li>How Shinyscholar helps to avoid common problems</li>
 <li>Disagapp as an example app</li>
@@ -506,20 +511,32 @@ margin-bottom: 30px;
 </section>
 <section id="about-me" class="slide level2">
 <h2>About me</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
 <ul>
 <li>Background in plant sciences and agricultural science</li>
 <li>Latecomer to R, starting in 2018</li>
 <li>Software developer in the Biostats group with Tim Lucas</li>
 </ul>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:30%;">
+<p><img src="images/me.jpg"></p>
+</div></div>
 </section>
 <section id="shiny-enables-the-creation-of-applications-in-r" class="slide level2">
 <h2>Shiny enables the creation of applications in R</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
 <ul>
 <li>R package developed by Posit/Rstudio, first released in 2012</li>
 <li>Framework for developing interactive applications using R</li>
 <li>Can run locally or online</li>
 <li>Make it much easier to share code with non R-users</li>
 </ul>
+</div><div class="column" style="width:30%;">
+<p><img src="images/shiny.svg"></p>
+</div></div>
 <aside class="notes">
 <ul>
 <li>Anything in R can be made GUI with Shiny</li>
@@ -627,7 +644,7 @@ margin-bottom: 30px;
 <section id="metabayesdta" class="slide level2">
 <h2>MetaBayesDTA</h2>
 
-<img data-src="images/metabayesdta.png" class="r-stretch"><div class="footer">
+<img src="images/metabayesdta.png" class="centre_image r-stretch"><div class="footer">
 <ul>
 <li>Cerullo <em>et al.</em> (2023) <a href="https://doi.org/10.1186/s12874-023-01910-y" target="_blank">DOI: 10.1186/s12874-023-01910-y</a></li>
 <li><a href="https://crsu.shinyapps.io/MetaBayesDTA/" target="_blank">https://crsu.shinyapps.io/MetaBayesDTA/</a></li>
@@ -637,7 +654,7 @@ margin-bottom: 30px;
 <section id="soil-benchmark" class="slide level2">
 <h2>Soil Benchmark</h2>
 
-<img data-src="images/soil_benchmark.png" class="r-stretch"><div class="footer">
+<img src="images/soil_benchmark.png" class="centre_image r-stretch"><div class="footer">
 <ul>
 <li><a href="https://www.soilbenchmark.com/" target="_blank">https://www.soilbenchmark.com/</a></li>
 </ul>
@@ -646,24 +663,11 @@ margin-bottom: 30px;
 <section id="kerus-cloud" class="slide level2">
 <h2>Kerus Cloud</h2>
 
-<img data-src="images/kerus_cloud.png" class="r-stretch"><div class="footer">
+<img src="images/kerus_cloud.png" class="centre_image r-stretch"><div class="footer">
 <ul>
 <li><a href="https://exploristics.com/keruscloud-platform-overview/" target="_blank">https://exploristics.com/keruscloud-platform-overview/</a></li>
 </ul>
 </div>
-</section>
-<section id="shinyscholar-helps-create-high-quality-analytical-applications" class="slide level2">
-<h2>Shinyscholar helps create high quality analytical applications</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<ul>
-<li>Creates an empty application with a regular structure</li>
-<li>Make it easier to follow software development best practices</li>
-<li>Developers can concentrate on creating functionality</li>
-</ul>
-</div><div class="column" style="width:30%;">
-<p><img src="images/ss_logo.png" width="auto" height="auto" align="right"></p>
-</div></div>
 </section>
 <section id="shiny-apps-consist-of-a-user-interface-object-ui-and-a-server-object" class="slide level2 largecode">
 <h2>Shiny apps consist of a user interface object (UI) and a server object</h2>
@@ -951,39 +955,6 @@ margin-bottom: 30px;
 </section>
 <section id="apps-published-in-2023-were-surveyed-to-determine-current-practices" class="slide level2">
 <h2>50 apps published in 2023 were surveyed to determine current practices</h2>
-<ul>
-<li>For each, the papers, apps and source code examined</li>
-<li>Papers:
-<ul>
-<li>Do they cite packages?</li>
-<li>Do they provide source code?</li>
-</ul></li>
-</ul>
-</section>
-<section id="each-app-was-examined-to-determine" class="slide level2">
-<h2>Each app was examined to determine:</h2>
-<ul>
-<li>Are they usable?</li>
-<li>Are they online?</li>
-<li>Do they provide instructions and explanation?</li>
-<li>Do they cite packages?</li>
-<li>Are they reproducible?</li>
-<li>Can errors be returned to the user?</li>
-<li>Can you save / load?</li>
-</ul>
-</section>
-<section id="where-available-source-code-was-examined-to-determine" class="slide level2">
-<h2>Where available, source code was examined to determine:</h2>
-<ul>
-<li>How many lines of code?</li>
-<li>Is it a package?</li>
-<li>Are there functions?</li>
-<li>Are there modules?</li>
-<li>Are there tests?</li>
-</ul>
-</section>
-<section id="few-existing-apps-have-these-characteristics" class="slide level2">
-<h2>Few existing apps have these characteristics</h2>
 
 <img src="images/app_features.svg" class="centre_image r-stretch"><aside class="notes">
 <ul>
@@ -1042,7 +1013,21 @@ margin-bottom: 30px;
 <li>Lots of useful features that are difficult to implement</li>
 <li>Removed all the modules</li>
 <li>Adapted files so they could be edited programmatically</li>
+<li>Made various changes to add functionality</li>
 </ul>
+</section>
+<section id="shinyscholar-helps-create-high-quality-analytical-applications" class="slide level2">
+<h2>Shinyscholar helps create high quality analytical applications</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li>Creates an empty application with a regular structure</li>
+<li>Make it easier to follow software development best practices</li>
+<li>Developers can concentrate on creating functionality</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img src="images/ss_logo.png" width="auto" height="auto" align="right"></p>
+</div></div>
 </section>
 <section id="shinyscholar-enforces-a-strict-structure" class="slide level2">
 <h2>Shinyscholar enforces a strict structure</h2>
@@ -1052,85 +1037,6 @@ margin-bottom: 30px;
 <li>Each module is reproduced by a markdown chunk</li>
 <li>Data is passed between modules through <code>common</code></li>
 </ul>
-</section>
-<section id="each-module-has-several-files-associated-with-it" class="slide level2">
-<h2>Each module has several files associated with it</h2>
-<ul>
-<li>Function: <code>&lt;component&gt;_&lt;module&gt;_f.R</code></li>
-<li>Module: <code>&lt;component&gt;_&lt;module&gt;.R</code></li>
-<li>Markdown: <code>&lt;component&gt;_&lt;module&gt;.Rmd</code></li>
-<li>Guidance: <code>&lt;component&gt;_&lt;module&gt;.md</code></li>
-<li>Configuration: <code>&lt;component&gt;_&lt;module&gt;.yml</code></li>
-<li>Tests: <code>test-&lt;component&gt;_&lt;module&gt;.R</code></li>
-</ul>
-</section>
-<section id="section" class="slide level2" data-menu-title="Shinyscholar intro">
-<h2></h2>
-
-<img data-src="images/ss_intro.png" class="r-stretch"></section>
-<section id="section-1" class="slide level2" data-menu-title="Shinyscholar guidance">
-<h2></h2>
-
-<img data-src="images/ss_guidance.png" class="r-stretch"></section>
-<section id="section-2" class="slide level2" data-menu-title="Shinyscholar code">
-<h2></h2>
-
-<img data-src="images/ss_code.png" class="r-stretch"></section>
-<section id="section-3" class="slide level2" data-menu-title="Shinyscholar query">
-<h2></h2>
-
-<img data-src="images/ss_query.png" class="r-stretch"></section>
-<section id="section-4" class="slide level2" data-menu-title="Shinyscholar plot">
-<h2></h2>
-
-<img data-src="images/ss_plot.png" class="r-stretch"><aside class="notes">
-<ul>
-<li>Point out guidance and attribution</li>
-<li>Code</li>
-<li>That it is apparent from the UI where code is located</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="markdown-files-can-be-merged-to-replicate-the-analysis" class="slide level2">
-<h2>Markdown files can be merged to replicate the analysis</h2>
-<ul>
-<li>When a module is used an object becomes <code>TRUE</code></li>
-<li>Input values are stored and <em>knitted</em> into the markdown</li>
-<li>Each chunk of the markdown calls the same function as the module in the app</li>
-<li>The chunks for used modules are combined into one <code>.Rmd</code> file</li>
-</ul>
-</section>
-<section id="input-values-are-copied-into-the-markdown" class="slide level2 mediumcode">
-<h2>Input values are copied into the markdown</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```{r, echo = {{select_query_knit}}, include = {{select_query_knit</span><span class="re">}}}</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">matrix</span>({{select_query_poly}}, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>token <span class="ot">&lt;-</span> {{select_query_token}}</span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>ras <span class="ot">&lt;-</span> <span class="fu">select_query</span>(poly, {{select_query_date}}, token)</span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>raster_name <span class="ot">&lt;-</span> {{select_query_name}}</span>
-<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="to-create-a-reproducible-chunk" class="slide level2 mediumcode">
-<h2>To create a reproducible chunk</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```{r}</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.54202</span>, <span class="sc">-</span><span class="fl">1.54202</span>, <span class="sc">-</span><span class="fl">0.718279</span>, <span class="sc">-</span><span class="fl">0.718279</span>, <span class="sc">-</span><span class="fl">1.54202</span>, <span class="fl">52.509368</span>, <span class="fl">52.789309</span>, <span class="fl">52.789309</span>, <span class="fl">52.509368</span>, <span class="fl">52.509368</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>token <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>ras <span class="ot">&lt;-</span> <span class="fu">select_query</span>(poly, <span class="st">"2024-10-09"</span>, token)</span>
-<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a>raster_name <span class="ot">&lt;-</span> <span class="st">"FAPAR"</span></span>
-<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="create_template-creates-an-empty-app" class="slide level2 mediumcode">
 <h2><code>create_template()</code> creates an empty app</h2>
@@ -1202,14 +1108,14 @@ margin-bottom: 30px;
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>common_objects <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"raster"</span>, <span class="st">"histogram"</span>, <span class="st">"scatter"</span>)</span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>shinyscholar<span class="sc">::</span><span class="fu">create_template</span>(</span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="fu">file.path</span>(<span class="st">"~"</span>, <span class="st">"Documents"</span>), <span class="at">name =</span> <span class="st">"demo"</span>, <span class="at">author =</span> <span class="st">"Simon E. H. Smart"</span>,</span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">include_map =</span> <span class="cn">TRUE</span>, <span class="at">include_table =</span> <span class="cn">TRUE</span>, <span class="at">include_code =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">common_objects =</span> common_objects, <span class="at">modules =</span> modules, <span class="at">install =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>demo<span class="sc">::</span><span class="fu">run_demo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>common_objects <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"raster"</span>, <span class="st">"histogram"</span>, <span class="st">"scatter"</span>)</span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>shinyscholar<span class="sc">::</span><span class="fu">create_template</span>(</span>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="fu">file.path</span>(<span class="st">"~"</span>, <span class="st">"Documents"</span>), <span class="at">name =</span> <span class="st">"demo"</span>, <span class="at">author =</span> <span class="st">"Simon E. H. Smart"</span>,</span>
+<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">include_map =</span> <span class="cn">TRUE</span>, <span class="at">include_table =</span> <span class="cn">TRUE</span>, <span class="at">include_code =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">common_objects =</span> common_objects, <span class="at">modules =</span> modules, <span class="at">install =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>demo<span class="sc">::</span><span class="fu">run_demo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <ul>
@@ -1227,10 +1133,135 @@ margin-bottom: 30px;
           display:block!important;
       }</style></aside>
 </section>
-<section id="section-5" class="slide level2" data-menu-title="Shinyscholar template">
+<section id="new-apps-can-also-be-generated-inside-the-shinyscholar-app" class="slide level2">
+<h2>New apps can also be generated inside the shinyscholar app</h2>
+
+<img src="images/ss_template.png" class="centre_image r-stretch"></section>
+<section id="developers-can-then-start-developing-modules" class="slide level2">
+<h2>Developers can then start developing modules</h2>
+
+<img src="images/demo.png" class="centre_image r-stretch"></section>
+<section id="each-module-has-several-files-associated-with-it" class="slide level2">
+<h2>Each module has several files associated with it</h2>
+<ul>
+<li>The component and module names are merged to create an identifier e.g.&nbsp;<code>load_user</code></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Function: <code>&lt;id&gt;_f.R</code></li>
+<li>Module: <code>&lt;id&gt;.R</code></li>
+<li>Markdown: <code>&lt;id&gt;.Rmd</code></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Guidance: <code>&lt;id&gt;.md</code></li>
+<li>Configuration: <code>&lt;id&gt;.yml</code></li>
+<li>Tests: <code>test-&lt;id&gt;.R</code></li>
+</ul>
+</div></div>
+</section>
+<section id="section" class="slide level2" data-menu-title="Shinyscholar intro">
 <h2></h2>
 
-<img data-src="images/ss_template.png" class="r-stretch"></section>
+<img src="images/ss_intro.png" class="centre_image r-stretch"></section>
+<section id="section-1" class="slide level2" data-menu-title="Shinyscholar guidance">
+<h2></h2>
+
+<img src="images/ss_guidance.png" class="centre_image r-stretch"><aside class="notes">
+<ul>
+<li>Point out guidance and attribution</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-2" class="slide level2" data-menu-title="Shinyscholar code">
+<h2></h2>
+
+<img src="images/ss_code.png" class="centre_image r-stretch"><aside class="notes">
+<ul>
+<li>Easy to understand what code is doing what</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-3" class="slide level2" data-menu-title="Shinyscholar query">
+<h2></h2>
+
+<img src="images/ss_query.png" class="centre_image r-stretch"><aside class="notes">
+<ul>
+<li>Logger contains details</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-4" class="slide level2" data-menu-title="Shinyscholar plot">
+<h2></h2>
+
+<img src="images/ss_plot.png" class="centre_image r-stretch"></section>
+<section id="section-5" class="slide level2" data-menu-title="Shinyscholar plot">
+<h2></h2>
+
+<img src="images/ss_reprod.png" class="centre_image r-stretch"></section>
+<section id="markdown-files-can-be-merged-to-replicate-the-analysis" class="slide level2">
+<h2>Markdown files can be merged to replicate the analysis</h2>
+<ul>
+<li>When a module is used an object becomes <code>TRUE</code></li>
+<li>Input values are stored and <em>knitted</em> into the markdown</li>
+<li>Each chunk of the markdown calls the same function as the module in the app</li>
+<li>The chunks for used modules are combined into one <code>.Rmd</code> file</li>
+</ul>
+</section>
+<section id="input-values-are-copied-into-the-markdown" class="slide level2 mediumcode">
+<h2>Input values are copied into the markdown</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```{r, echo = {{select_query_knit}}, include = {{select_query_knit</span><span class="re">}}}</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">matrix</span>({{select_query_poly}}, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>token <span class="ot">&lt;-</span> {{select_query_token}}</span>
+<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>ras <span class="ot">&lt;-</span> <span class="fu">select_query</span>(poly, {{select_query_date}}, token)</span>
+<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a>raster_name <span class="ot">&lt;-</span> {{select_query_name}}</span>
+<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="to-create-a-reproducible-chunk" class="slide level2 mediumcode">
+<h2>To create a reproducible chunk</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```{r}</span></span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.54202</span>, <span class="sc">-</span><span class="fl">1.54202</span>, <span class="sc">-</span><span class="fl">0.718279</span>, <span class="sc">-</span><span class="fl">0.718279</span>, <span class="sc">-</span><span class="fl">1.54202</span>, <span class="fl">52.509368</span>, </span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>                 <span class="fl">52.789309</span>, <span class="fl">52.789309</span>, <span class="fl">52.509368</span>, <span class="fl">52.509368</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>token <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>ras <span class="ot">&lt;-</span> <span class="fu">select_query</span>(poly, <span class="st">"2024-10-09"</span>, token)</span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>raster_name <span class="ot">&lt;-</span> <span class="st">"FAPAR"</span></span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="boring-repetitive-coding-tasks-are-automated" class="slide level2 mediumcode">
 <h2>Boring, repetitive coding tasks are automated</h2>
 <ul>
@@ -1261,14 +1292,6 @@ margin-bottom: 30px;
           display:block!important;
       }</style></aside>
 </section>
-<section id="slow-operations-can-be-run-asynchronously" class="slide level2">
-<h2>Slow operations can be run asynchronously</h2>
-<ul>
-<li>R runs on a single thread</li>
-<li>Slow steps (fitting a model) can block others from using the app</li>
-<li>If <code>async = TRUE</code> the modules are created so that functions run in the background</li>
-</ul>
-</section>
 <section id="disaggregation-regression-enables-high-resolution-disease-mapping" class="slide level2">
 <h2>Disaggregation regression enables high resolution disease mapping</h2>
 <div class="columns">
@@ -1295,6 +1318,230 @@ margin-bottom: 30px;
 <iframe width="100%" height="100%" src="http://127.0.0.1:5000">
 </iframe>
 </section>
+<section id="the-same-analysis-reproduced" class="slide level2">
+<h2>The same analysis reproduced</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>disagapp Session <span class="dv">2024-11-07</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="sc">==</span><span class="er">==============</span></span>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>Please find below the R code history from your <span class="sc">*</span>disagapp<span class="sc">*</span> v1.<span class="fl">0.0</span></span>
+<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>session.</span>
+<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>You can reproduce your session results by running this R Markdown file</span>
+<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">in</span> RStudio.</span>
+<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="" aria-hidden="true" tabindex="-1"></a>Each code block is called a “chunk”, and you can run them either</span>
+<span id="cb10-11"><a href="" aria-hidden="true" tabindex="-1"></a>one<span class="sc">-</span>by<span class="sc">-</span>one or all at once by choosing an option <span class="cf">in</span> the “Run” menu at the</span>
+<span id="cb10-12"><a href="" aria-hidden="true" tabindex="-1"></a>top<span class="sc">-</span>right corner of the “Source” pane <span class="cf">in</span> RStudio. The file can also be</span>
+<span id="cb10-13"><a href="" aria-hidden="true" tabindex="-1"></a>rendered into an html file using <span class="st">`</span><span class="at">rmarkdown::render()</span><span class="st">`</span> which will</span>
+<span id="cb10-14"><a href="" aria-hidden="true" tabindex="-1"></a>contain all of the outputs alongside the code used to generate them.</span>
+<span id="cb10-15"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="" aria-hidden="true" tabindex="-1"></a>For more detailed information see <span class="sc">&lt;</span>http<span class="sc">:</span><span class="er">//</span>rmarkdown.rstudio.com<span class="sc">&gt;</span>.</span>
+<span id="cb10-17"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="" aria-hidden="true" tabindex="-1"></a><span class="do">### Package installation</span></span>
+<span id="cb10-19"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="" aria-hidden="true" tabindex="-1"></a>disagapp uses the following R packages that must be installed and loaded</span>
+<span id="cb10-21"><a href="" aria-hidden="true" tabindex="-1"></a>before starting.</span>
+<span id="cb10-22"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-24"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">library(terra)</span></span>
+<span id="cb10-25"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">library(leaflet)</span></span>
+<span id="cb10-26"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">library(disaggregation)</span></span>
+<span id="cb10-27"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">library(disagapp)</span></span>
+<span id="cb10-28"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#create empty list to store covariate data</span></span>
+<span id="cb10-30"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates &lt;- list()</span></span>
+<span id="cb10-31"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#set a seed</span></span>
+<span id="cb10-33"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">set.seed(319)</span></span>
+<span id="cb10-34"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-35"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="" aria-hidden="true" tabindex="-1"></a>The <span class="sc">*</span>disagapp<span class="sc">*</span> session code .Rmd file is composed of a chain of module</span>
+<span id="cb10-37"><a href="" aria-hidden="true" tabindex="-1"></a>functions that are internal to <span class="sc">*</span>disagapp<span class="sc">*</span>. Each of these functions</span>
+<span id="cb10-38"><a href="" aria-hidden="true" tabindex="-1"></a>corresponds to a single module that the user ran during the session. To</span>
+<span id="cb10-39"><a href="" aria-hidden="true" tabindex="-1"></a>see the internal code <span class="cf">for</span> these module functions, click on the links <span class="cf">in</span></span>
+<span id="cb10-40"><a href="" aria-hidden="true" tabindex="-1"></a>the .Rmd file. Users are encouraged to write custom code <span class="cf">in</span> the .Rmd</span>
+<span id="cb10-41"><a href="" aria-hidden="true" tabindex="-1"></a>directly to modify their analysis, and even modify the module <span class="cf">function</span></span>
+<span id="cb10-42"><a href="" aria-hidden="true" tabindex="-1"></a>code to further customize. To see the source code <span class="cf">for</span> any module</span>
+<span id="cb10-43"><a href="" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span>, just type its name into the R console and press Return.</span>
+<span id="cb10-44"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="" aria-hidden="true" tabindex="-1"></a>Your analyses are below.</span>
+<span id="cb10-46"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------</span></span>
+<span id="cb10-48"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="" aria-hidden="true" tabindex="-1"></a>Load the selected example dataset</span>
+<span id="cb10-50"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-52"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">dataset &lt;- "mad"</span></span>
+<span id="cb10-53"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">switch(dataset,</span></span>
+<span id="cb10-54"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">       "mad" = {</span></span>
+<span id="cb10-55"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shpdf &lt;- data.frame(datapath = list.files(system.file("extdata", "shapes", package="disagapp"), full.names = TRUE),</span></span>
+<span id="cb10-56"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                             name = list.files(system.file("extdata", "shapes", package="disagapp")))</span></span>
+<span id="cb10-57"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shape &lt;- resp_shape(shpdf)</span></span>
+<span id="cb10-58"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         },</span></span>
+<span id="cb10-59"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">       "nys" = {</span></span>
+<span id="cb10-60"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shape &lt;- SpatialEpi::NYleukemia_sf</span></span>
+<span id="cb10-61"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">       },</span></span>
+<span id="cb10-62"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">       "scot" = {</span></span>
+<span id="cb10-63"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shape &lt;- SpatialEpi::scotland_sf</span></span>
+<span id="cb10-64"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shape$geometry &lt;- shape$geometry * 1000</span></span>
+<span id="cb10-65"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shape &lt;- sf::st_set_crs(shape, 27700)</span></span>
+<span id="cb10-66"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">         shape &lt;- sf::st_transform(shape, crs = 4326)</span></span>
+<span id="cb10-67"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">       }</span></span>
+<span id="cb10-68"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">)</span></span>
+<span id="cb10-69"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-70"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-71"><a href="" aria-hidden="true" tabindex="-1"></a>Load accessibility data and add to covariates list</span>
+<span id="cb10-72"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-73"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-74"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">access &lt;- disagapp::cov_access(shape, "Travel Time to Cities (2015)")</span></span>
+<span id="cb10-75"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates[["Travel Time to Cities (2015)"]] &lt;- access</span></span>
+<span id="cb10-76"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-77"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-78"><a href="" aria-hidden="true" tabindex="-1"></a>Download bioclim data and add to covariates list</span>
+<span id="cb10-79"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-80"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-81"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">bioclim &lt;- disagapp::cov_bioclim(shape, "MDG", c("Mean temperature", "Total precipitation"))</span></span>
+<span id="cb10-82"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates &lt;- append(covariates, bioclim)</span></span>
+<span id="cb10-83"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-84"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="" aria-hidden="true" tabindex="-1"></a>Download land use data and add to covariates list</span>
+<span id="cb10-86"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-87"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-88"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">land_use &lt;- disagapp::cov_landuse(shape, 2019, c("BuiltUp", "Crops"))</span></span>
+<span id="cb10-89"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates &lt;- append(covariates, land_use)</span></span>
+<span id="cb10-90"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-91"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-92"><a href="" aria-hidden="true" tabindex="-1"></a>Download population count data from Worldpop</span>
+<span id="cb10-93"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-94"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-95"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">aggregation &lt;- disagapp::agg_worldpop(shape, "MDG", "Constrained", "1km", 2020)</span></span>
+<span id="cb10-96"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-97"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-98"><a href="" aria-hidden="true" tabindex="-1"></a>Build the spatial mesh</span>
+<span id="cb10-99"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-100"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-101"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">mesh &lt;- disaggregation::build_mesh(shape, </span></span>
+<span id="cb10-102"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                   mesh_args = list(</span></span>
+<span id="cb10-103"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                    convex = -0.01,</span></span>
+<span id="cb10-104"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                    concave = -0.5,</span></span>
+<span id="cb10-105"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                    resolution = 300,</span></span>
+<span id="cb10-106"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                    max.edge = c(1.5, 3.1), </span></span>
+<span id="cb10-107"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                    cutoff = 0.05,</span></span>
+<span id="cb10-108"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                    offset = c(1.5, 3.1)))</span></span>
+<span id="cb10-109"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-110"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-111"><a href="" aria-hidden="true" tabindex="-1"></a>Prepare the covariates and aggregation raster so that their extent and</span>
+<span id="cb10-112"><a href="" aria-hidden="true" tabindex="-1"></a>resolution match, enabling them to be stacked into a single SpatRaster</span>
+<span id="cb10-113"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-114"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-115"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#temporarily add the aggregation raster to the covariates list</span></span>
+<span id="cb10-116"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates$aggregation &lt;- aggregation</span></span>
+<span id="cb10-117"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-118"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#prepare the summary</span></span>
+<span id="cb10-119"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariate_summary &lt;- prep_summary(covariates, remove = FALSE)</span></span>
+<span id="cb10-120"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-121"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#show the table</span></span>
+<span id="cb10-122"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">DT::datatable(covariate_summary)</span></span>
+<span id="cb10-123"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-124"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-125"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-126"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates$aggregation &lt;- NULL</span></span>
+<span id="cb10-127"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates_prepared &lt;- lapply(covariates, terra::resample, covariates[["BuiltUp land use"]])</span></span>
+<span id="cb10-128"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-129"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#store and then remove the prepared aggregation raster</span></span>
+<span id="cb10-130"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">aggregation_prepared &lt;- terra::resample(aggregation, covariates[["BuiltUp land use"]], method = "sum")</span></span>
+<span id="cb10-131"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-132"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">#convert the list of SpatRasters into a multi-layered SpatRaster</span></span>
+<span id="cb10-133"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates_prepared &lt;- terra::rast(covariates_prepared)</span></span>
+<span id="cb10-134"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-135"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-136"><a href="" aria-hidden="true" tabindex="-1"></a>Scale the covariates and store the parameters <span class="cf">for</span> potential reuse</span>
+<span id="cb10-137"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-138"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-139"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">scaled_covariate_output &lt;- prep_scale(covariates_prepared)</span></span>
+<span id="cb10-140"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-141"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates_prepared &lt;- scaled_covariate_output[["covariates"]]</span></span>
+<span id="cb10-142"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">scaling_parameters &lt;- scaled_covariate_output[["parameters"]]</span></span>
+<span id="cb10-143"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-144"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-145"><a href="" aria-hidden="true" tabindex="-1"></a>Reduce resolution of covariates and aggregation raster</span>
+<span id="cb10-146"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-147"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-148"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">covariates_prepared &lt;- terra::aggregate(covariates_prepared, fact = 4, fun = "mean")</span></span>
+<span id="cb10-149"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">aggregation_prepared &lt;- terra::aggregate(aggregation_prepared, fact = 4, fun = "sum")</span></span>
+<span id="cb10-150"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-151"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-152"><a href="" aria-hidden="true" tabindex="-1"></a>Plot a correlation matrix of the prepared covariates</span>
+<span id="cb10-153"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-154"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-155"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">correlation_matrix &lt;- disagapp::prep_correlation(covariates_prepared)</span></span>
+<span id="cb10-156"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-157"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">corrplot::corrplot(correlation_matrix, </span></span>
+<span id="cb10-158"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                   method = "circle",</span></span>
+<span id="cb10-159"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                   type = "lower",</span></span>
+<span id="cb10-160"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                   diag = FALSE)</span></span>
+<span id="cb10-161"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-162"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-163"><a href="" aria-hidden="true" tabindex="-1"></a>Prepare the data <span class="cf">for</span> fitting the model and plot a summary.</span>
+<span id="cb10-164"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-165"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-166"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">prepared_data &lt;- disaggregation::prepare_data(polygon_shapefile = shape,</span></span>
+<span id="cb10-167"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                     covariate_rasters = covariates_prepared,</span></span>
+<span id="cb10-168"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                     aggregation_raster = aggregation_prepared,</span></span>
+<span id="cb10-169"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                     id_var = "ID_2",</span></span>
+<span id="cb10-170"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                     response_var = "inc",</span></span>
+<span id="cb10-171"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                     na_action = TRUE,</span></span>
+<span id="cb10-172"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                     make_mesh = FALSE)</span></span>
+<span id="cb10-173"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-174"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">prepared_data$mesh &lt;- mesh</span></span>
+<span id="cb10-175"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-176"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">plot(prepared_data)</span></span>
+<span id="cb10-177"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-178"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-179"><a href="" aria-hidden="true" tabindex="-1"></a>Fit the model</span>
+<span id="cb10-180"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-181"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-182"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at"># Create NULL priors if they have not been set</span></span>
+<span id="cb10-183"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">if (!exists("priors")) {</span></span>
+<span id="cb10-184"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  priors &lt;- NULL</span></span>
+<span id="cb10-185"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">}</span></span>
+<span id="cb10-186"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-187"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">fitted_model &lt;- disaggregation::disag_model(data = prepared_data,</span></span>
+<span id="cb10-188"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            priors = priors,</span></span>
+<span id="cb10-189"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            family = "poisson",</span></span>
+<span id="cb10-190"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            link = "log",</span></span>
+<span id="cb10-191"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            iterations = 100,</span></span>
+<span id="cb10-192"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            field = TRUE,</span></span>
+<span id="cb10-193"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            iid = TRUE</span></span>
+<span id="cb10-194"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">                                            )</span></span>
+<span id="cb10-195"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb10-196"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-197"><a href="" aria-hidden="true" tabindex="-1"></a>Generate predictions from the model</span>
+<span id="cb10-198"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-199"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb10-200"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">prediction &lt;- disaggregation::predict_model(fitted_model, predict_iid = TRUE)</span></span>
+<span id="cb10-201"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-202"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">plot(prediction$prediction)</span></span>
+<span id="cb10-203"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-204"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">prediction$cases &lt;- prediction$prediction * aggregation_prepared</span></span>
+<span id="cb10-205"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-206"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">plot(prediction$cases)</span></span>
+<span id="cb10-207"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-208"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">if (!is.null(prediction$field)){</span></span>
+<span id="cb10-209"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  terra::crs(prediction$field) &lt;- terra::crs(prepared_data$covariate_rasters[[1]])</span></span>
+<span id="cb10-210"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  prediction$field &lt;- terra::mask(prediction$field, prepared_data$covariate_rasters[[1]])</span></span>
+<span id="cb10-211"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  plot(prediction$field)  </span></span>
+<span id="cb10-212"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">}</span></span>
+<span id="cb10-213"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-214"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">if (!is.null(prediction$iid)){</span></span>
+<span id="cb10-215"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  plot(prediction$iid)  </span></span>
+<span id="cb10-216"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">}</span></span>
+<span id="cb10-217"><a href="" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
@@ -1306,8 +1553,8 @@ margin-bottom: 30px;
 </ul></li>
 </ul>
 </section>
-<section id="github" class="slide level2">
-<h2>Github</h2>
+<section id="github-resources" class="slide level2">
+<h2>Github resources</h2>
 <ul>
 <li><a href="https://github.com/simon-smart88 " target="_blank">https://github.com/simon-smart88</a></li>
 <li>shinyscholar</li>
